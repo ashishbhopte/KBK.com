@@ -1,0 +1,129 @@
+*{
+margin:0;
+padding:0;
+}
+.header{
+color: white;
+min-height:100vh;
+width:100%;
+background-image: linear-gradient(rgba(4,6,30,0.7),rgba(4,6,30,0.7)),url(/static/images/back1.jpg);
+background-position:center;
+position:relative;
+background-color:yellow;
+border: 2px solid red;
+background-size: cover;
+}
+
+
+.header nav a img{
+ height:50px;
+ width:200px;
+ margin-left:0px;
+ border:2px solid red;
+}
+
+nav{
+display: flex;
+padding: 2% 6%;
+justify-content: space-between;
+align-item:center;
+}
+.nav-links{
+flex;1;  /*so it can occupy all the space in the row*/
+text-align: right;
+}
+.nav-links ul li{
+list-style:none;
+display: inline-block;
+padding:12px 12px;
+position:relative;
+}
+.nav-links ul li a{
+text-decoration: none;
+color: white;
+margin-right: 20px;
+font-size: 20px;
+font-family: 'Kanit', sans-serif;
+font-family: 'Teko', sans-serif;
+font-family: 'Ubuntu', sans-serif;
+}
+
+.nav-links ul li::after{
+   content:'';
+   width:0%;
+   height:2px;
+   background: #F93535;
+   /*margin:auto;*/
+   display: block;
+   transition:0.5s;
+}
+
+.nav-links ul li:hover::after{
+   width:80%;
+}
+
+.header-content{
+display:flex;
+column-gap:5px;
+}
+.header-left{
+background-color:green;
+height:60%;
+width:120%;
+}
+
+.header-right{
+border:3px solid red;
+width:70%;
+margin-right:60px;
+border-radius: 20px;
+background-color:rgba(35, 26, 26,0.6);
+}
+
+.header-right h1{
+padding-top:20px;
+padding-bottom:15px;
+text-align:center;
+font-family: 'Kanit', sans-serif;
+font-family: 'Teko', sans-serif;
+font-family: 'Ubuntu', sans-serif;
+font-size:24px;
+}
+
+.header-right form{
+display: grid;
+place-items: center;
+height: 60vh;
+width:100%;
+}
+
+.header-right form input{
+padding:10px;
+width:80%;
+}
+
+.header-right p{
+padding-bottom:20px;
+margin: 0px 40px;
+}
+
+.header-right button{
+margin-left:0%;
+justify-content:center;
+padding:10px;
+border-radius:15px;
+font-size: 15px;
+background-color:rgb(255, 35, 17);
+transition: transform 0.5s;
+}
+.header-right button:hover{
+ background-color:#9F0100;
+ transform:translate(1px);
+ cursor: pointer;
+}
+
+.header-right p a{
+color: red;
+text-decoration: none;
+}
+
