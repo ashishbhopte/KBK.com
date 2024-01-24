@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'BKB_Home',
     'BKB_Registation',
-    #'captcha',
+    'django_recaptcha',
 ]
 
 MIDDLEWARE = [
@@ -127,5 +127,5 @@ STATICFILES_DIRS = [
     BASE_DIR, "static",
 ]
 
-RECAPTCHA_PUBLIC_KEY = '6Ld8L0opAAAAAIDDdn9JFexDX_V0Xm9QuartGasI'
-RECAPTCHA_PRIVATE_KEY = '6Ld8L0opAAAAAD01nrPQsrrzKh6kjDxG9ZVx_vTC'
+RECAPTCHA_PUBLIC_KEY = '6LcpBlEpAAAAAJXNdDkHd1sJz-7foTlGz7mH9rc3'
+RECAPTCHA_PRIVATE_KEY = '6LcpBlEpAAAAAO0tcE-HdkxfmxMEFC95IIEKsrY9'

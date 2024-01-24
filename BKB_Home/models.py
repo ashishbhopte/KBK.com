@@ -4,13 +4,13 @@ from django.core.validators import RegexValidator  # for regular expression in d
 
 # Create your models here.
 class KBKform(models.Model):
-    Name = models.CharField(max_length=70, null=False, blank=False)
+    Name = models.CharField(max_length=70, null=False, blank=False,unique=True)
     Email = models.EmailField(unique=True)  # Use EmailField for email addresses
     Phone_no = models.CharField(max_length=15, validators=[RegexValidator(r'^\d{10,15}$','Enter a valid mobile number.')])  # This will validate the no and get only the integer value .
-    Url = models.TextField()
+    Url = models.CharField(max_length=255,unique=True)
     Company = models.CharField(max_length=100, null=False, blank=False)
     Date = models.DateField()
 
     def __str__(self):
         return self.Name
-    print('this is module.py ')
+

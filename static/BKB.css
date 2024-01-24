@@ -96,10 +96,11 @@ place-items: center;
 height: 60vh;
 width:100%;
 }
-
-.header-right form input{
-padding:10px;
-width:80%;
+/*This class I have named in form.py */
+.form-cont{
+margin: 6px 0px;
+background-color:white;
+height:40px;
 }
 
 .header-right p{
@@ -108,13 +109,13 @@ margin: 0px 40px;
 }
 
 .header-right button{
+margin-top:0%;
 margin-left:0%;
 justify-content:center;
 padding:10px;
 border-radius:15px;
 font-size: 15px;
-background-color:rgb(255, 35, 17);
-transition: transform 0.5s;
+background-color:rgb(255, 35, 17); vb
 }
 .header-right button:hover{
  background-color:#9F0100;
@@ -127,3 +128,28 @@ color: red;
 text-decoration: none;
 }
 
+/*_____________from here about section css-----------------*/
+
+.about{
+color: white;
+min-height:100%;
+width:100%;
+background-image: linear-gradient(rgba(4,6,30,0.7),rgba(4,6,30,0.7)),url(/static/images/about.jpg);
+background-position:center;
+position:relative;
+background-color:yellow;
+border: 2px solid red;
+background-size: cover;
+}
+
+.about_heading{
+text-align: center;
+margin-top:5px;
+}
+
+.about p{
+text-align: justify;
+margin:0% 10%;
+font-size:20px;
+font-color: #FFFFFF;
+}
