@@ -15,6 +15,35 @@ def Home(request):
         'form': form})  # here we have not mention the path becuase in settings.py we have specified the path of templates file
 
 
+# def SaveForm(request):
+#     if request.method == "POST":
+#         form = KBKForm(request.POST)
+#         try:
+#             if form.is_valid():
+#                 Name = request.POST.get('Name')
+#                 Email = request.POST.get('Email')
+#                 Phone_no = request.POST.get('Phone_no')
+#                 Url = request.POST.get('Url')
+#                 Company = request.POST.get('Company')
+#                 Date = datetime.datetime.now()
+#                 form_data = KBKform(Name=Name, Email=Email, Phone_no=Phone_no, Url=Url, Company=Company, Date=Date)
+#                 form_data.save()  # This method will save the data
+#                 form = KBKForm()
+#                 return render(request, 'thankyou.html')
+#
+#         except IntegrityError as e:  # Check if it's a unique constraint violation
+#             if 'unique constraint' in str(e):
+#                 form.add_error('Url', 'You already used our services')
+#                 return render(request, 'BKB.html', {'form': form})
+#             else:
+#                 raise e
+#                 return render(request, 'BKB.html', {'form': form})
+#         except ValueError:
+#             return render(request, 'BKB.html', {'form': form})
+#
+#         except:
+#             form.add_error('Phone_no', 'Please check the format of the phone no.')
+#             return render(request, 'BKB.html', {'form': form})
 def SaveForm(request):
     if request.method == "POST":
         form = KBKForm(request.POST)
@@ -30,6 +59,10 @@ def SaveForm(request):
                 form_data.save()  # This method will save the data
                 form = KBKForm()
                 return render(request, 'thankyou.html')
+            else:
+                form.add_error('Invald Form Entry,Please check!')
+                return render(request, 'BKB.html', {'form': form})
+
 
         except IntegrityError as e:  # Check if it's a unique constraint violation
             if 'unique constraint' in str(e):
@@ -38,9 +71,13 @@ def SaveForm(request):
             else:
                 raise e
                 return render(request, 'BKB.html', {'form': form})
-
-        except:
-            form.add_error('Phone_no', 'Please check the format of the phone no.')
+        except ValueError:
             return render(request, 'BKB.html', {'form': form})
 
+        except:
+            # form.add_error('Phone_no', 'Please check the format of the phone no.')
+            return render(request, 'BKB.html', {'form': form})
 
+    # else:
+    #     form = KBKForm()
+    #     return render(request, 'BKB.html', {'form': form})

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta  name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,8 @@
     <!--linking the css file -->
     <link rel="stylesheet" href="/static/BKB.css">
     <!--linking the js file -->
-    <script src="/static/BKB.js"></script>
+    <script defer src="/static/BKB.js"></script>
+    <script defer src="/static/BKB1.js"></script>
 
 
     <!--Bootstrap file cdn-->
@@ -65,7 +66,7 @@
              </div>
              {% endif %}
 
-            <p>If you've used our services,<a href="#"> Click here </a>to connect with us or share your valuable feedback!</p>
+            <p>If you've used our free service than please, <a href="#"> SignIn</a> or <a href="#"> SignUp</a> to connect with us for more specialized services!</p>
         </div>
     </div>
 </section>
@@ -78,19 +79,17 @@
         enhancing your online visibility and driving organic traffic to your website through strategic off-page optimization
         techniques like Link Building , Social media marketing, Local SEO etc.
     </div>
-    </p>
     <div class="choose">
         <h4>Why To Choose Us:</h4>
     </div>
 
     <!--yha se slider code hai -->
-
+<i class="fa-solid fa-arrow-left"></i>
     <div id="slider">
    <input type="radio" name="slider" id="slide1" checked>
    <input type="radio" name="slider" id="slide2">
    <input type="radio" name="slider" id="slide3">
    <input type="radio" name="slider" id="slide4">
-
    <div id="slides">
       <div id="overflow">
          <div class="inner">
@@ -115,7 +114,7 @@
             <div class="slide slide_4">
                <div class="slide-content">
                   <h2>"Client Success Stories:</h2>
-                  <p>"Join Our Growing List of Satisfied Customers."</p>
+                  <p>"Join Our Growing List of Satisfied Customers below:"</p>
                </div>
             </div>
          </div>
@@ -137,120 +136,208 @@
     </div>
 
 <!--userrating section-->
-<div class="rating_section">
 
-<div class="swiper-container">
-    <div class="swiper mySwiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <div class="card">
-            <div class="image">
-              <img src="/static/images/userimage/7.jpeg" alt="Card Image">
-            </div>
-            <h3>User1</h3>
-            <p> Model Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias beatae dolor incidunt mi quas qui quia? Quam. Aliquid autem beatae commodi iusto laborum porro quaerat recusandae reprehenderit, sit sunt.</p>
-              <div class="userrating">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
-
-              </div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="card">
-            <div class="image">
-              <img src="/static/images/userimage/6.jpeg" alt="Card Image">
-            </div>
-            <h3>User2</h3>
-            <p>Product Manager Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur assumenda corporis cumque deserunt dolor esse ipsa nihil placeat qui quisquam.</p>
-              <div class="userrating">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
-
-              </div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="card">
-            <div class="image">
-              <img src="/static/images/userimage/5.jpg" alt="Card Image">
-            </div>
-            <h3>User3</h3>
-            <p>Online Teacher</p>
-              <div class="userrating">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
-
-              </div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="card">
-            <div class="image">
-              <img src="/static/images/userimage/4.jpg" alt="Card Image">
-            </div>
-            <h3>User3</h3>
-            <p>Sale Manager</p>
-              <div class="userrating">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
-
-              </div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="card">
-            <div class="image">
-              <img src="/static/images/userimage/3.jpg" alt="Card Image">
-            </div>
-            <h3>User4</h3>
-            <p>Fashion Model</p>
-              <div class="userrating">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
-
-              </div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="card">
-            <div class="image">
-              <img src="/static/images/userimage/2.jpg" alt="Card Image">
-            </div>
-            <h3>User5</h3>
-            <p>Product Manager</p>
-              <div class="userrating">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
-
-              </div>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="card">
-            <div class="image">
-              <img src="/static/images/userimage/1.jpg" alt="Card Image">
-            </div>
-            <h3>User6</h3>
-            <p>Online Teacher</p>
-              <div class="userrating">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
-              </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- If we need pagination -->
-    <div class="swiper-pagination"></div>
-
-    <!-- If we need navigation buttons -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-
-    <!-- If we need scrollbar -->
-    <div class="swiper-scrollbar"></div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-  <script src="/static/BKB.js"></script>  <!--Here I am adding the js file changes-->
-</body>
+<div class="Userrating-heading">
+    <h3>Our Client Review and Appriciation:</h3>
 </div>
 
+    <div class="read-more-container">  <!--THIS is targeted by js for show less and more  -->
+        <div class="rating_section">
+            <div class="swiper-container">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <div class="image">
+                                    <img src="/static/images/userimage/7.jpeg" alt="Card Image">
+                                </div>
+                                <h3>User1</h3>
+                                <div class="container">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur
+                                        consequuntur delectus
+                                        eligendi enim libero officia quas ratione repudiandae rerum ut!
+                                        <span class="read-more-text">
+                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aut autem exercitationem ipsum labore officiis pariatur perferendis ut? Consectetur ipsum molestias nostrum vitae? Architecto commodi eaque eum, quae quod tempora!
+                                         </span>
+                                    </p>
+                                    <spen class="read-more-btn">
+                                        Read More...
+                                    </spen>
+                                </div>
+                            <div class="userrating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card">
+                            <div class="image">
+                                <img src="/static/images/userimage/6.jpeg" alt="Card Image">
+                            </div>
+                            <h3>User2</h3>
+                                <div class="container">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur
+                                        consequuntur delectus
+                                        eligendi enim libero officia quas ratione repudiandae rerum ut!
+                                        <span class="read-more-text">
+                                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aut autem exercitationem ipsum labore officiis pariatur perferendis ut? Consectetur ipsum molestias nostrum vitae? Architecto commodi eaque eum, quae quod tempora!
+                                         </span>
+                                    </p>
+                                    <spen class="read-more-btn">
+                                        Read More...
+                                    </spen>
+                                </div>
+                            <div class="userrating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card">
+                            <div class="image">
+                                <img src="/static/images/userimage/5.jpg" alt="Card Image">
+                            </div>
+                            <h3>User3</h3>
+                                <div class="container">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium deleniti
+                                        eos ex harum
+                                        labore minima velit! Dicta dignissimos ducimus maiores.
+                                        <span class="read-more-text">
+                                           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam distinctio eveniet fugit porro quasi quibusdam sequi sint voluptatem? Asperiores consequatur dolores doloribus et eveniet illo perferendis reiciendis sunt veritatis, voluptatum?                    </span>
+                                        </span>
+                                    </p>
+                                    <spen class="read-more-btn">
+                                        Read More...
+                                    </spen>
+                                </div>
+                            <div class="userrating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card">
+                            <div class="image">
+                                <img src="/static/images/userimage/4.jpg" alt="Card Image">
+                            </div>
+                            <h3>User3</h3>
+                                <div class="container">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eum iure
+                                        libero mollitia
+                                        quasi ratione repellat repellendus sit totam voluptatem.
+                                        <span class="read-more-text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, animi asperiores cum cupiditate ducimus earum esse et explicabo impedit minus nemo nihil omnis, optio porro ratione sit vel veniam? Porro.
+                    </span>
+                                    </p>
+                                    <spen class="read-more-btn">
+                                        Read More...
+                                    </spen>
+                                </div>
+                            <div class="userrating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card">
+                            <div class="image">
+                                <img src="/static/images/userimage/3.jpg" alt="Card Image">
+                            </div>
+                            <h3>User4</h3>
+                                <div class="container">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci amet
+                                        aspernatur, beatae
+                                        consequatur excepturi id molestias quidem soluta suscipit.
+                                        <span class="read-more-text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto labore maxime nesciunt qui. Aut deleniti dolor doloribus eius, enim et excepturi illum libero, modi, mollitia optio quibusdam ratione suscipit ut!
+                    </span>
+                                    </p>
+                                    <spen class="read-more-btn">
+                                        Read More...
+                                    </spen>
+                                </div>
+                            <div class="userrating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card">
+                            <div class="image">
+                                <img src="/static/images/userimage/2.jpg" alt="Card Image">
+                            </div>
+                            <h3>User5</h3>
+                                <div class="container">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium corporis
+                                        debitis ex
+                                        facilis neque nesciunt numquam possimus reprehenderit ullam, voluptate!
+                                        <span class="read-more-text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda consectetur dolore earum esse ex exercitationem fugiat incidunt iure maiores, minima, quod tempore, totam vel. Asperiores assumenda earum illo iusto pariatur.
+                    </span>
+                                    </p>
+                                    <spen class="read-more-btn">
+                                        Read More...
+                                    </spen>
+                                </div>
+                            <div class="userrating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card">
+                            <div class="image">
+                                <img src="/static/images/userimage/1.jpg" alt="Card Image">
+                            </div>
+                            <h3>User6</h3>
+                                <div class="container">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore perspiciatis
+                                        reiciendis sed?
+                                        Est harum hic labore, laboriosam nisi quos saepe.
+                                        <span class="read-more-text">
+                                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consectetur, consequatur doloremque, dolores explicabo illo inventore iusto laboriosam laudantium molestias neque nesciunt nihil non omnis, quidem quis repellat repudiandae tempora?
+                                        </span>
+                                    </p>
+                                    <spen class="read-more-btn">
+                                        Read More...
+                                    </spen>
+                                </div>
+                            <div class="userrating">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+            <!-- If we need scrollbar -->
+            <div class="swiper-scrollbar"></div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+        <!--<script src="/static/BKB.js"></script> --> <!--we donot need this line-->
+    </div>
 </section>
 </body>
 </html>
