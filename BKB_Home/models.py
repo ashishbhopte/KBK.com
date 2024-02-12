@@ -14,3 +14,11 @@ class KBKform(models.Model):
     def __str__(self):
         return self.Name
 
+class signup(models.Model):
+    Name = models.CharField(max_length=70, null=False, blank=False, unique=True)
+    Email = models.EmailField(unique=True)  # Use EmailField for email addresses
+    Phone_no = models.CharField(max_length=15, validators=[RegexValidator(r'^\d{10,15}$','Enter a valid mobile number.')])  # This will validate the no and get only the integer value .
+    Url = models.CharField(max_length=255,unique=True)
+    Company = models.CharField(max_length=100, null=False, blank=False)
+    password = models.CharField(max_length=20, null=False, blank=False,default='#12345678')
+    Date = models.DateField()
