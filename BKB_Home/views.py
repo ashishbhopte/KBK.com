@@ -1,19 +1,24 @@
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.core.mail import send_mail
 from django.db import IntegrityError
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .form import KBKForm,Signup # remember mene form  and model ka nam same diyta hai
-from .models import KBKform,signup
+from .form import KBKForm, Signup, Signin  # remember mene form  and model ka nam same diyta hai
+from .models import KBKform
 import datetime
-from django.http import HttpResponse
-from django.shortcuts import render, HttpResponse,redirect
+from django.contrib.auth.models import User, auth
+from django.shortcuts import render, HttpResponse, redirect
+# from ..Project_KBK import settings
+# from ..Project_KBK import settings
 from django.http import Http404, HttpResponseServerError
-
-
 
 
 def Home(request):
     form = KBKForm()
-    return render(request, 'BKB.html', {'form': form})  # here we have not mention the path becuase in settings.py we have specified the path of templates file
+    return render(request, 'BKB.html', {
+        'form': form})  # here we have not mention the path becuase in settings.py we have specified the path of templates file
+
 
 def SaveForm(request):
     if request.method == "POST":
@@ -51,10 +56,59 @@ def SaveForm(request):
 
 
 def signup(request):
-    form1 = Signup()
-    return render(request, 'Signup.html', {'form1': form1})
+    if request.method == "POST":
+        form = Signup(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Your account has successfully created, please check the gmail in order to create your account!")
+            return redirect('/signin')
+
+            # welcome email
+            subject = "Welcome to BKB login!!!"
+            message = "Hello" +  "!! \n" + "Welcome to BKB SEO and Web Services, we are here to grow your business. \n Let's grow together!!!!" + "we will soon send you the confirmation email, Please confirm your email to activate your account. \n\n Thanks and Regards! \nBKB Services."
+            from_email = settings.EMAIL_HOST_USER
+            to_list = [form.email]
+            send_mail(subject, message, from_email, to_list, fail_silently=True)
+
+
+
+        username = request.POST['username']
+        if User.objects.filter(username=username):
+            messages.error(request,"Entered user name is already exist, Please try with other user name!")
+            return redirect('/signup')
+        if len(username)>10:
+            messages.error(request, "User name should be less than 10 character!")
+            return redirect('/signup')
+        if not username.isalnum():
+            messages.error(request, "User name should alpha newmeric!")
+            return redirect('/signup')
+
+    else:
+        form = Signup()
+    return render(request, 'Signup.html', {'form': form})
+
+
 
 def signin(request):
-    return render(request,'Signin.html')
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(username=username, password=password)
+        if user is not None: # after successfull authentication
+            login(request, user)
+            uname=user.first_name
+            return render(request,'afterlogin.html',{'uname':uname})
+        else: # if credential will not match
+            messages.error(request,"your username and password is wrong!")
+            return redirect('/signin')
+    else:
+        form = Signin()
+    return render(request, 'Signin.html', {'form': form})
+
+
 def signout(request):
-    pass
+    logout(request)
+    messages.success(request,"Logged out sucessfully!!!")
+    return redirect('/')
+
