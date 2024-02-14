@@ -1,0 +1,5 @@
+EMAIL_USE_TLS=True
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='bkbseoandweb@gmail.com'
+EMAIL_HOST_PASSWORD='#BKBg001e'
+EMAIL_PORT= 587

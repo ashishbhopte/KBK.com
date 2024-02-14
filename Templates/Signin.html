@@ -2,15 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SignIn</title>
-    <link rel="stylesheet" href="">
+    <title>BKB SignIn</title>
+    <link rel="stylesheet" href="/static/Signin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
 <body>
 <div class="container">
 <div class="form-box">
-    <h1>Sign IN</h1>
+    <img src="/static/images/logo.png" alt="logo of BKB">
+    <h1 id="title">Sign In</h1>
+    <form method="post" > <!--id="my_signup" onabort="" name="signup" action="{% url 'signup' %}" method="post">-->
+        {% csrf_token %}
 
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+               <strong>Alert:</strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+
+        {{form}}
+
+        <!--<span style="color:red;">{{msg}}</span>-->
+        <div class="btn-field">
+            <button  class="disable"><a href="/signup">SignUp</a></button>
+            <button type="submit" value="RESET" onclick="resetForm()" >Sign-In</button>
+        </div>
+
+    </form>
 </div>
 </div>
 </body>
