@@ -17,13 +17,14 @@ from . info import *
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# This one I have added for gmail ing
+# This one I have added for gmail code
 
-EMAIL_USE_TLS=EMAIL_USE_TLS
-EMAIL_HOST=EMAIL_HOST
+EMAIL_HOST= EMAIL_HOST
+EMAIL_PORT= EMAIL_PORT
 EMAIL_HOST_USER=EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD=EMAIL_HOST_PASSWORD
-EMAIL_PORT= EMAIL_PORT
+EMAIL_USE_TLS=EMAIL_USE_TLS
+
 
 
 # Quick-start development settings - unsuitable for production

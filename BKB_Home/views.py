@@ -9,8 +9,9 @@ from .models import KBKform
 import datetime
 from django.contrib.auth.models import User, auth
 from django.shortcuts import render, HttpResponse, redirect
-# from ..Project_KBK import settings
-# from ..Project_KBK import settings
+from Project_KBK import settings
+
+
 from django.http import Http404, HttpResponseServerError
 
 
@@ -60,15 +61,15 @@ def signup(request):
         form = Signup(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request,"Your account has successfully created, please check the gmail in order to create your account!")
-            return redirect('/signin')
+            messages.success(request,"Your account has successfully Signed in, please verift the gmail by clicking the verification link!")
 
-            # welcome email
-            subject = "Welcome to BKB login!!!"
-            message = "Hello" +  "!! \n" + "Welcome to BKB SEO and Web Services, we are here to grow your business. \n Let's grow together!!!!" + "we will soon send you the confirmation email, Please confirm your email to activate your account. \n\n Thanks and Regards! \nBKB Services."
+            ##code: welcome email
+            subject = "Welcome to BKB signin!!!"
+            message = "Hello"
             from_email = settings.EMAIL_HOST_USER
-            to_list = [form.email]
+            to_list = ['ashishbhopte123@gmail.com']
             send_mail(subject, message, from_email, to_list, fail_silently=True)
+            return redirect('/signin')
 
 
 
@@ -76,11 +77,11 @@ def signup(request):
         if User.objects.filter(username=username):
             messages.error(request,"Entered user name is already exist, Please try with other user name!")
             return redirect('/signup')
-        if len(username)>10:
+        if len(username)>15:
             messages.error(request, "User name should be less than 10 character!")
             return redirect('/signup')
         if not username.isalnum():
-            messages.error(request, "User name should alpha newmeric!")
+            messages.error(request, "User name should alpha newmeric !")
             return redirect('/signup')
 
     else:

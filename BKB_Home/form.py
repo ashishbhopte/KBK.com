@@ -49,7 +49,7 @@ class Signup(UserCreationForm):
     def clean_email(self):  ## This is for email duplication check
         value = self.cleaned_data['email']
         if User.objects.filter(email=value).exists():
-            raise forms.ValidationError("This email ID is already registered, Please try with another one!")
+            raise forms.ValidationError("This email ID is already registered, Please signup with another one!")
         return value
 
     class meta:
