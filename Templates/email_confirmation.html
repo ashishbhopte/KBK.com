@@ -1,0 +1,10 @@
+{% autoescape off %}
+Welcome fo BKB login!
+
+Hello {{name}}!,
+
+Please confirm the email by clicking the following link:
+Confirmation link: http://{{domain}}{% url 'acivate' uidb64=uid token=token %}
+
+{% endautoescape %}
+

@@ -65,7 +65,6 @@ class Signup(UserCreationForm):
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
         if commit:
-            print(user)
             user.save()
         return user
     def pass_to_email(self):
