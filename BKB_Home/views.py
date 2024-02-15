@@ -4,16 +4,13 @@ from django.core.mail import send_mail
 from django.db import IntegrityError
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .form import KBKForm, Signup, Signin  # remember mene form  and model ka nam same diyta hai
+from .form import KBKForm, Signup, Signin # remember mene form  and model ka nam same diyta hai
 from .models import KBKform
 import datetime
 from django.contrib.auth.models import User, auth
 from django.shortcuts import render, HttpResponse, redirect
 from Project_KBK import settings
-
-
 from django.http import Http404, HttpResponseServerError
-
 
 def Home(request):
     form = KBKForm()
@@ -60,14 +57,15 @@ def signup(request):
     if request.method == "POST":
         form = Signup(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request,"Your account has successfully Signed in, please verift the gmail by clicking the verification link!")
+            form.save() # this will give u current user name.
+            messages.success(request,"Your account has successfully register, Please verift the gmail by clicking the verification link in order to successfull Signup!!")
 
-            ##code: welcome email
+            ## welcome to BKB , email code
+            user_email = form.pass_to_email()  # ['this will return the email of user in list data structure and user 1st name']
             subject = "Welcome to BKB signin!!!"
-            message = "Hello"
+            message = "Dear " + user_email[1] + "," + "\nWelcome to BKB Seo and Web Services, your trusted partner for effective Off-Page SEO services!, we specialize in enhancing your online visibility and driving organic traffic to your website through strategic off-page optimization techniques like Link Building , Social media marketing, Local SEO etc."+"\n\n" + "Please check the confirmation mail and click on confirmation link in order to activate singup" + "\n" + "Thanks and Regards, \n" + "BKB SERVICES."
             from_email = settings.EMAIL_HOST_USER
-            to_list = ['ashishbhopte123@gmail.com']
+            to_list=[str(user_email[0])]
             send_mail(subject, message, from_email, to_list, fail_silently=True)
             return redirect('/signin')
 
