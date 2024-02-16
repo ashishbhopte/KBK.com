@@ -60,6 +60,22 @@ def SaveForm(request):
 def signup(request):
     if request.method == "POST":
         form = Signup(request.POST)
+        username = request.POST['username']
+        email = request.POST['email']
+        if User.objects.filter(username=username):
+            messages.error(request, "Entered user name is already exist, Please try with other user name!")
+            return redirect('/signup')
+        if len(username) > 15:
+            messages.error(request, "User name should be less than 10 character!")
+            return redirect('/signup')
+        if not username.isalnum():
+            messages.error(request, "User name should alpha numeric !")
+            return redirect('/signup')
+        if User.objects.filter(email=email):
+            messages.error(request, "User email is already exist, Please login with this email or forger password!")
+            return redirect('/signin')
+
+
         if form.is_valid():
             form.save().is_active=False # this will inctive the user even user is successfully created.
             form.save() # this will give u current user name.
@@ -68,7 +84,7 @@ def signup(request):
             ## start code for signup 1 mail: welcome to BKB services check the confirmation mail.
 
             user_email = form.pass_to_email()  # ['this will return the email of user in list data structure and user 1st name']
-            subject = "Welcome to BKB signin!!!"
+            subject = "Welcome to BKB signup!!!"
             message = "Dear " + user_email[1] + "!," + "\nWelcome to BKB Seo and Web Services, your trusted partner for effective Off-Page SEO services!, we specialize in enhancing your online visibility and driving organic traffic to your website through strategic off-page optimization techniques like Link Building , Social media marketing, Local SEO etc."+"\n\n" + "Please check the confirmation mail and click on confirmation link in order to activate singup" + "\n\n" + "Thanks and Regards, \n" + "BKB SERVICES."
             from_email = settings.EMAIL_HOST_USER
             to_list=[str(user_email[0])]
@@ -76,6 +92,8 @@ def signup(request):
             return redirect('/signin')
 
             ## ending code for signup 1 mail: welcome to BKB services check the confirmation mail.
+
+
             ## starting code for signup 2 mail: cnfirmation mail link.
             current_site = get_current_site(request)
             email_subject = "Please confirm your email authentication @BKB Services!"
@@ -95,17 +113,7 @@ def signup(request):
             email.fail_silentl=True
             email.send()
 
-
-        username = request.POST['username']
-        if User.objects.filter(username=username):
-            messages.error(request,"Entered user name is already exist, Please try with other user name!")
-            return redirect('/signup')
-        if len(username)>15:
-            messages.error(request, "User name should be less than 10 character!")
-            return redirect('/signup')
-        if not username.isalnum():
-            messages.error(request, "User name should alpha newmeric !")
-            return redirect('/signup')
+            ## ending code for signup 2 mail: confirmation mail link.
 
     else:
         form = Signup()
