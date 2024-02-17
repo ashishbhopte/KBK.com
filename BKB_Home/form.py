@@ -46,11 +46,11 @@ class Signup(UserCreationForm):
                                 required=True)
     django_recaptcha = ReCaptchaField(label=False, required=True)
 
-    def clean_email(self):  ## This is for email duplication check
-        value = self.cleaned_data['email']
-        if User.objects.filter(email=value).exists():
-            raise forms.ValidationError("This email ID is already registered, Please signup with another one!")
-        return value
+    # def clean_email(self):  ## This is for email duplication check
+    #     value = self.cleaned_data['email']
+    #     if User.objects.filter(email=value).exists():
+    #         raise forms.ValidationError("This email ID is already registered, Please signup with another one!")
+    #     return value
 
     class meta:
         model = User
