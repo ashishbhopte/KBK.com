@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.db import IntegrityError
-from .form import KBKForm, Signup, Signin # remember mene form  and model ka nam same diyta hai
+from .form import KBKForm, Signup, Signin # remember mene form  and model ka nam same diya hai
 from .models import KBKform,signup_model
 import datetime
 from django.contrib.auth.models import User, auth
@@ -73,19 +73,19 @@ def signup(request):
         if not username.isalnum():
             messages.error(request, "User name should alpha numeric !")
             return redirect('/signup')
-        # try:
-        # user=User.objects.get(username=username)
-        signup_model_date = signup_model(user=username, auth_tocken=str(uuid.uuid4()), is_verified=False)
-        signup_model_date.save()  # This will store this data in db.(signup_model)
-        # except Exception as e:
-        #     print(e)
-
         if form.is_valid():
             form.save().is_active=False # this will inactive the user even user is successfully created, remember in admin area.
             form.save() # this will give u current user name.
+            try:
+                user = User.objects.get(username=username)
+                signup_model_obj = signup_model.objects.create(user=user, auth_tocken=str(uuid.uuid4()), is_verified=False)
+                signup_model_obj.save()  # This will store this data in db.(signup_model)
+            except Exception as e:
+                print(e)
+
             ## start code for signup 1 mail
             user_email = form.pass_to_email()  # ['this will return the email of user in list data structure and user 1st name']
-            subject = "Welcome to BKB Signup!| Please verify your email!!"
+            subject = "Welcome to BKB Signup!|| Please verify your email!!"
             message = "Dear " + user_email[1] + "!\n\n" +"Please verify the below link:\n"+"\nWelcome to BKB Seo and Web Services, your trusted partner for effective Off-Page SEO services!, we specialize in enhancing your online visibility and driving organic traffic to your website through strategic off-page optimization techniques like Link Building , Social media marketing, Local SEO etc."+"\n\n" + "Please check the confirmation mail and click on confirmation link in order to activate singup" + "\n\n" + "Thanks and Regards, \n" + "BKB SERVICES."
             from_email = settings.EMAIL_HOST_USER
             to_list=[str(user_email[0])]
