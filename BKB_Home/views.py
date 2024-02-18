@@ -12,7 +12,9 @@ from django.template.loader import render_to_string
 from Project_KBK import settings
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes,force_str
-from django.http import Http404, HttpResponseServerError
+from django.http import Http404
+from django.contrib.auth.models import User
+from . models import signup_model
 def Home(request):
     form = KBKForm()
     return render(request, 'BKB.html', {
@@ -72,7 +74,8 @@ def signup(request):
             messages.error(request, "User name should alpha numeric !")
             return redirect('/signup')
         # try:
-        signup_model_date = signup_model.objects.create(user=username, auth_tocken=str(uuid.uuid4()), is_verified=False)
+        # user=User.objects.get(username=username)
+        signup_model_date = signup_model(user=username, auth_tocken=str(uuid.uuid4()), is_verified=False)
         signup_model_date.save()  # This will store this data in db.(signup_model)
         # except Exception as e:
         #     print(e)
