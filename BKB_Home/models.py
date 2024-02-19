@@ -22,5 +22,5 @@ class signup_model(models.Model):
     auth_tocken = models.CharField(max_length=100, default=None)
     is_verified = models.BooleanField(default=False)  # This field have to reflect in my admin user model also usko vies.py se hadle karna bad me
 
-    # def __str__(self):
-    #     return self.user
+    def __str__(self):
+        return self.user.username

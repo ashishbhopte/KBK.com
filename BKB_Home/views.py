@@ -4,17 +4,17 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.db import IntegrityError
 from .form import KBKForm, Signup, Signin # remember mene form  and model ka nam same diya hai
-from .models import KBKform,signup_model
+from .models import KBKform, signup_model
 import datetime
 from django.contrib.auth.models import User, auth
 from django.shortcuts import render, HttpResponse, redirect
-from django.template.loader import render_to_string
 from Project_KBK import settings
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes,force_str
 from django.http import Http404
 from django.contrib.auth.models import User
 from . models import signup_model
+from django.contrib.sites.shortcuts import get_current_site
 def Home(request):
     form = KBKForm()
     return render(request, 'BKB.html', {
@@ -83,55 +83,45 @@ def signup(request):
             except Exception as e:
                 print(e)
 
+            current_site = get_current_site(request) # Function is used to retrieve the current site from the Site model.
+            print('current_site',current_site)
+            domain = current_site.domain
+
             ## start code for signup 1 mail
+            auth_tocken = str(uuid.uuid4())
             user_email = form.pass_to_email()  # ['this will return the email of user in list data structure and user 1st name']
             subject = "Welcome to BKB Signup!|| Please verify your email!!"
-            message = "Dear " + user_email[1] + "!\n\n" +"Please verify the below link:\n"+"\nWelcome to BKB Seo and Web Services, your trusted partner for effective Off-Page SEO services!, we specialize in enhancing your online visibility and driving organic traffic to your website through strategic off-page optimization techniques like Link Building , Social media marketing, Local SEO etc."+"\n\n" + "Please check the confirmation mail and click on confirmation link in order to activate singup" + "\n\n" + "Thanks and Regards, \n" + "BKB SERVICES."
+            message = "Dear " + user_email[1] + "!\n\n" +"Please verify the below link:\n"+str(domain) + '/activate/'+str(auth_tocken)+"\nWelcome to BKB Seo and Web Services, your trusted partner for effective Off-Page SEO services!, we specialize in enhancing your online visibility and driving organic traffic to your website through strategic off-page optimization techniques like Link Building , Social media marketing, Local SEO etc."+"\n\n" + "Please check the confirmation mail and click on confirmation link in order to activate singup" + "\n\n" + "Thanks and Regards, \n" + "BKB SERVICES."
             from_email = settings.EMAIL_HOST_USER
             to_list=[str(user_email[0])]
             send_mail(subject, message, from_email, to_list, fail_silently=True)
             messages.success(request,'Your registtion has successfully completed please chaeck and verify a email by clicking verification link!')
-            return redirect('/signin')
-
-            ## ending code 1 mail
-
+            return render(request,'Signin.html')
+            ## ending code for signup 1 mail
     else:
         form = Signup()
     return render(request, 'Signup.html', {'form': form})
 
 # This acivate function creating for html link by click to redirect signin page
-def activate(request, uidb64, token):
+def activate(request, auth_tocken):
     try:
-        uid= force_str(urlsafe_base64_decode(uidb64))
-        myuser=User.objects.get(pk=uid)
-    except( TypeError, ValueError,OverflowError,User.DoesNotExist):
-        myuser= None
-    if myuser is not None:
-        myuser.is_active = True
-        myuser.save()
-        messages.success(request,'your gmail has verified and your account is activatd now!,Please login')
-        return redirect('/signin')
-    else:
-        return render(request, 'activation_failed.html')
-
+        signup_model_obj=signup_model.objects.filter(auth_tocken=auth_tocken).first() # yha prob ho sakti hai
+        if signup_model_obj:
+            signup_model_obj.is_verified=True
+            User.is_active=True
+            signup_model_obj.save()
+            User.save()
+            messages.success(request, 'Your email has successfully verified!, Please sign in!')
+            return redirect('/signin')
+        else:
+            messages.success(request, 'Your email has not verified!, Please verify the email to signin!')
+            return redirect('/signin')
+    except Exception as e:
+        print(e)
 
 def signin(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-
-        user = authenticate(username=username, password=password)
-        if user is not None: # after successfull authentication
-            login(request, user)
-            uname=user.first_name
-            return render(request,'afterlogin.html',{'uname':uname})
-        else: # if credential will not match
-            messages.error(request,"your username and password is wrong!")
-            return redirect('/signin')
-    else:
-        form = Signin()
-    return render(request, 'Signin.html', {'form': form})
-
+    #yha per signin forms se data lekar login logic likho
+    return render(request,'afterlogin.html')
 
 def signout(request):
     logout(request)
