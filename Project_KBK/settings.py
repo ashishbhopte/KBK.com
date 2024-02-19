@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from . info import *
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -141,3 +142,10 @@ STATICFILES_DIRS = [
 
 RECAPTCHA_PUBLIC_KEY = '6LcpBlEpAAAAAJXNdDkHd1sJz-7foTlGz7mH9rc3'
 RECAPTCHA_PRIVATE_KEY = '6LcpBlEpAAAAAO0tcE-HdkxfmxMEFC95IIEKsrY9'
+
+
+
+# This is for dynamic alert messaging notification
+MESSAGE_TAGS={
+    messages.ERROR:'danger'
+}
