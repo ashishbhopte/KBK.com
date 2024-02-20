@@ -74,8 +74,8 @@ def signup(request):
             messages.error(request, "User name should alpha numeric !")
             return redirect('/signup')
         if form.is_valid():
-            form.save().is_active=False # this will inactive the user even user is successfully created, remember in admin area.
-            form.save() # this will give u current user name.
+            form.save().is_active=False  # this will inactivate the user even user is successfully created, remember in admin area.
+            form.save()  # this will give u current user name.
             try:
                 auth_tocken = str(uuid.uuid4())
                 user = User.objects.get(username=username)
@@ -92,7 +92,7 @@ def signup(request):
 
             user_email = form.pass_to_email()  # ['this will return the email of user in list data structure and user 1st name']
             subject = "Welcome to BKB Signup!|| Please verify your email!!"
-            message = "Dear " + user_email[1] + "!\n\n" +"Please verify the below link:\n"+str(domain) + '/activate/'+str(auth_tocken)+"\nWelcome to BKB Seo and Web Services, your trusted partner for effective Off-Page SEO services and Web Development!, we specialize in enhancing your online visibility and driving organic traffic to your website through strategic off-page optimization techniques like Link Building , Social media marketing, Local SEO etc."+"\n\n" + "Please click the confirmation link in order to activate  singup." + "\n\n" + "Thanks and Regards, \n" + "BKB SERVICES."
+            message = "Dear " + user_email[1] + "!\n\n" +"Please verify the below link:\n"+str(domain) + '/activate/'+f'{str(auth_tocken)}'+"\nWelcome to BKB Seo and Web Services, your trusted partner for effective Off-Page SEO services and Web Development!, we specialize in enhancing your online visibility and driving organic traffic to your website through strategic off-page optimization techniques like Link Building , Social media marketing, Local SEO etc."+"\n\n" + "Please click the confirmation link in order to activate  singup." + "\n\n" + "Thanks and Regards, \n" + "BKB SERVICES."
             from_email = settings.EMAIL_HOST_USER
             to_list=[str(user_email[0])]
             send_mail(subject, message, from_email, to_list, fail_silently=True)
@@ -106,17 +106,18 @@ def signup(request):
 # This acivate function creating for html link by click to redirect signin page
 def activate(request, auth_tocken):
     try:
-        signup_model_obj=signup_model.objects.filter(auth_tocken=auth_tocken).first() # yha prob ho sakti hai
-        print('signup_model_obj:', signup_model_obj.auth_tocken)
+        signup_model_obj= signup_model.objects.filter(auth_tocken=auth_tocken).first()# yha prob ho sakti hai
         if signup_model_obj:
             signup_model_obj.is_verified=True
-            User.is_active=True
-            signup_model_obj.save()
-            User.save()
+            form = Signup()
+            form.is_active = True
+            form.save()
+            print('user save data  ke bad')
+            signup_model.save()
             messages.success(request, 'Your email has successfully verified!, Please sign in!')
-            form = Signin()
             return redirect('/signin')
         else:
+            print('inside the else!')
             messages.error(request, 'Your email has not verified!, Please verify the email and signup again!')
             return redirect('/signup')
     except Exception as e:
