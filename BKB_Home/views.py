@@ -43,7 +43,7 @@ def SaveForm(request):
 
         except IntegrityError as e:  # Check if it's a unique constraint violation
             if 'unique constraint' in str(e):
-                form.add_error('Url', 'You already used our services')
+                form.add_error('Url', 'You have already used our services!')
                 return render(request, 'BKB.html', {'form': form})
             else:
                 raise e
@@ -77,8 +77,9 @@ def signup(request):
             form.save().is_active=False # this will inactive the user even user is successfully created, remember in admin area.
             form.save() # this will give u current user name.
             try:
+                auth_tocken = str(uuid.uuid4())
                 user = User.objects.get(username=username)
-                signup_model_obj = signup_model.objects.create(user=user, auth_tocken=str(uuid.uuid4()), is_verified=False)
+                signup_model_obj = signup_model.objects.create(user=user, auth_tocken=str(auth_tocken), is_verified=False)
                 signup_model_obj.save()  # This will store this data in db.(signup_model)
             except Exception as e:
                 print(e)
@@ -88,37 +89,38 @@ def signup(request):
             domain = current_site.domain
 
             ## start code for signup 1 mail
-            auth_tocken = str(uuid.uuid4())
+
             user_email = form.pass_to_email()  # ['this will return the email of user in list data structure and user 1st name']
             subject = "Welcome to BKB Signup!|| Please verify your email!!"
             message = "Dear " + user_email[1] + "!\n\n" +"Please verify the below link:\n"+str(domain) + '/activate/'+str(auth_tocken)+"\nWelcome to BKB Seo and Web Services, your trusted partner for effective Off-Page SEO services and Web Development!, we specialize in enhancing your online visibility and driving organic traffic to your website through strategic off-page optimization techniques like Link Building , Social media marketing, Local SEO etc."+"\n\n" + "Please click the confirmation link in order to activate  singup." + "\n\n" + "Thanks and Regards, \n" + "BKB SERVICES."
             from_email = settings.EMAIL_HOST_USER
             to_list=[str(user_email[0])]
             send_mail(subject, message, from_email, to_list, fail_silently=True)
-            messages.info(request,'Your registtion has successfully completed please chaeck and verify a email by clicking verification link!')
+            messages.info(request,'Your registtion has successfully completed please check and verify a email by clicking verification link!')
             return render(request,'Signin.html')
             ## ending code for signup 1 mail
     else:
         form = Signup()
-        return render(request, 'Signup.html', {'form': form})
+        return render(request, 'Signup.html',{'form': form})
 
 # This acivate function creating for html link by click to redirect signin page
 def activate(request, auth_tocken):
     try:
         signup_model_obj=signup_model.objects.filter(auth_tocken=auth_tocken).first() # yha prob ho sakti hai
+        print('signup_model_obj:', signup_model_obj.auth_tocken)
         if signup_model_obj:
             signup_model_obj.is_verified=True
             User.is_active=True
             signup_model_obj.save()
             User.save()
             messages.success(request, 'Your email has successfully verified!, Please sign in!')
+            form = Signin()
             return redirect('/signin')
         else:
             messages.error(request, 'Your email has not verified!, Please verify the email and signup again!')
             return redirect('/signup')
     except Exception as e:
         print(e)
-
 def signin(request):
     #yha per signin forms se data lekar login logic likho
     form = Signin()
