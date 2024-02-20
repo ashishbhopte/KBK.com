@@ -106,12 +106,14 @@ def signup(request):
 # This acivate function creating for html link by click to redirect signin page
 def activate(request, auth_tocken):
     try:
+
         signup_model_obj= signup_model.objects.filter(auth_tocken=auth_tocken).first()# yha prob ho sakti hai
+        user = User.objects.get(auth_tocken=auth_tocken)
+        print(user)
         if signup_model_obj:
             signup_model_obj.is_verified=True
-            form = Signup()
-            form.is_active = True
-            form.save()
+            # user.is_active = True
+            # user.save()
             print('user save data  ke bad')
             signup_model.save()
             messages.success(request, 'Your email has successfully verified!, Please sign in!')
