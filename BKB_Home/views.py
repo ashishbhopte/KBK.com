@@ -88,6 +88,7 @@ def signup(request):
             print('current_site',current_site)
             domain = current_site.domain
 
+
             ## start code for signup 1 mail
 
             user_email = form.pass_to_email()  # ['this will return the email of user in list data structure and user 1st name']
@@ -106,16 +107,18 @@ def signup(request):
 # This acivate function creating for html link by click to redirect signin page
 def activate(request, auth_tocken):
     try:
-
         signup_model_obj= signup_model.objects.filter(auth_tocken=auth_tocken).first()# yha prob ho sakti hai
-        user = User.objects.get(auth_tocken=auth_tocken)
+        user = User.objects.get(username=signup_model_obj)
         print(user)
         if signup_model_obj:
+            print('inside the if ',signup_model_obj)
             signup_model_obj.is_verified=True
-            # user.is_active = True
-            # user.save()
+            print(' after signup_model_obj',signup_model_obj.is_verified)
+            signup_model_obj.save()
+            print('after savin signup_model_obj')
+            user.is_active = True
+            user.save()
             print('user save data  ke bad')
-            signup_model.save()
             messages.success(request, 'Your email has successfully verified!, Please sign in!')
             return redirect('/signin')
         else:
