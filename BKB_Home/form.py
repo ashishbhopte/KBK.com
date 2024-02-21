@@ -73,10 +73,13 @@ class Signup(UserCreationForm):
 
 
 class Signin(forms.Form):
-    username = forms.EmailField(label=False, widget=forms.TextInput(
+    username = forms.CharField(label=False, widget=forms.TextInput(
         attrs={'class': "form-cont", 'placeholder': "Username",
                'style': 'width: 80%;'}), required=True)
     password = forms.CharField(label=False, widget=forms.PasswordInput(
         attrs={'class': "form-cont", 'placeholder': "Password", 'style': 'width: 80%;'}),
                                required=True)
     django_recaptcha = ReCaptchaField(label=False, required=True)
+    class meta:
+        model = User
+        field = ('username','password')
