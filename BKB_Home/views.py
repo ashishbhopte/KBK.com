@@ -128,7 +128,23 @@ def activate(request, auth_tocken):
     except Exception as e:
         print(e)
 def signin(request):
-    #yha per signin forms se data lekar login logic likho
+    form = Signin(request.POST)
+    username = request.POST['username']
+    password = request.POST['password']
+    if request.method == 'POST':
+        try:
+            if form.is_valid():
+                username = username.POST.get('username')
+                password = password.POST.get('password')
+                user_obj = User.objects.filter(username=username).first() # This line will filter user from the DB.
+                if user_obj is None:
+                    messages.error(request,"This user is not present, Please signin!")
+                    return render(request,'Signin.html',{'form': form})
+
+        except:
+            form = Signin()
+
+
     form = Signin()
     return render(request,'Signin.html',{'form': form})
 def signout(request):
