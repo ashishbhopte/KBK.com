@@ -128,25 +128,43 @@ def activate(request, auth_tocken):
     except Exception as e:
         print(e)
 def signin(request):
-    form = Signin(request.POST)
-    username = request.POST['username']
-    password = request.POST['password']
-    if request.method == 'POST':
+    print('This is inside the sigin page')
+    if request.method == "POST":
+        form = Signin(request.POST)
+        username = request.POST['username']
+        password = request.POST['password']
         try:
             if form.is_valid():
-                username = username.POST.get('username')
-                password = password.POST.get('password')
+                print('inside if I am here!')
+                # username = username.POST.get('username')
+                # password = password.POST.get('password')
                 user_obj = User.objects.filter(username=username).first() # This line will filter user from the DB.
                 if user_obj is None:
-                    messages.error(request,"This user is not present, Please signin!")
+                    messages.error(request,"User not found, Please signup!")
+                    print('User not found, Please signup')
                     return render(request,'Signin.html',{'form': form})
-
+                signup_model_obj=signup_model.objects.filter(user=user_obj).first()
+                if not signup_model_obj.is_verified:
+                    messages.error(request, "This object is not at verified, Please verify it by email and signin!")
+                    print('This object is not at verified, Please verify it by email and signin!')
+                    return render(request, 'Signin.html', {'form': form})
+                user=authenticate(username=username,password=password)
+                if user is None:
+                    messages.error(request, "Credencials are incorrect please verify and signin again!")
+                    print('Credencials are incorrect please verify and signin again!')
+                    return render(request, 'Signin.html', {'form': form})
+                login(request, user)
+                return render(request,'afterlogin.html')
         except:
-            form = Signin()
+            # form = Signin()
+            messages.error(request, "Something went wrong please check and verify again!")
+            print('Something went wrong please check and verify again!')
+            return render(request, 'Signin.html', {'form': form})
+    else:
+        form = Signin()
+        print('inside else I am here ')
+        return render(request, 'Signin.html', {'form': form})
 
-
-    form = Signin()
-    return render(request,'Signin.html',{'form': form})
 def signout(request):
     logout(request)
     messages.success(request,"Logged out sucessfully!!!")
