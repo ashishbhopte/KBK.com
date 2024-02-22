@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'BKB_Home',
     'BKB_Registation',
     'django_recaptcha',
+    'django.contrib.sites', ## This is for login with google 
 ]
 
 MIDDLEWARE = [
@@ -140,12 +141,12 @@ STATICFILES_DIRS = [
     BASE_DIR, "static",
 ]
 
+# #this is recapcha keys
 RECAPTCHA_PUBLIC_KEY = '6LcpBlEpAAAAAJXNdDkHd1sJz-7foTlGz7mH9rc3'
 RECAPTCHA_PRIVATE_KEY = '6LcpBlEpAAAAAO0tcE-HdkxfmxMEFC95IIEKsrY9'
-
-
 
 # This is for dynamic alert messaging notification
 MESSAGE_TAGS={
     messages.ERROR:'danger'
 }
+

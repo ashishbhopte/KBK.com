@@ -73,34 +73,37 @@ def signup(request):
         if not username.isalnum():
             messages.error(request, "User name should alpha numeric !")
             return redirect('/signup')
-        # if form.is_valid():
-        form.save().is_active=False  # this will inactivate the user even user is successfully created, remember in admin area.
-        form.save()  # this will give u current user name.
-        try:
-            auth_tocken = str(uuid.uuid4())
-            user = User.objects.get(username=username)
-            signup_model_obj = signup_model.objects.create(user=user, auth_tocken=str(auth_tocken), is_verified=False)
-            signup_model_obj.save()  # This will store this data in db.(signup_model)
-        except Exception as e:
-            print(e)
+        if form.is_valid():
+            form.save().is_active=False  # this will inactivate the user even user is successfully created, remember in admin area.
+            form.save()  # this will give u current user name.
+            try:
+                auth_tocken = str(uuid.uuid4())
+                user = User.objects.get(username=username)
+                signup_model_obj = signup_model.objects.create(user=user, auth_tocken=str(auth_tocken), is_verified=False)
+                signup_model_obj.save()  # This will store this data in db.(signup_model)
+            except Exception as e:
+                print(e)
 
-        current_site = get_current_site(request) # Function is used to retrieve the current site from the Site model.
-        print('current_site',current_site)
-        domain = current_site.domain
+            current_site = get_current_site(request) # Function is used to retrieve the current site from the Site model.
+            print('current_site',current_site)
+            domain = current_site.domain
+            ## start code for signup 1 mail
 
-
-        ## start code for signup 1 mail
-
-        user_email = form.pass_to_email()  # ['this will return the email of user in list data structure and user 1st name']
-        subject = "Welcome to BKB Signup!|| Please verify your email!!"
-        message = "Dear " + user_email[1] + "!\n\n" +"Please verify the below link:\n"+str(domain) + '/activate/'+f'{str(auth_tocken)}'+"\nWelcome to BKB Seo and Web Services, your trusted partner for effective Off-Page SEO services and Web Development!, we specialize in enhancing your online visibility and driving organic traffic to your website through strategic off-page optimization techniques like Link Building , Social media marketing, Local SEO etc."+"\n\n" + "Please click the confirmation link in order to activate  singup." + "\n\n" + "Thanks and Regards, \n" + "BKB SERVICES."
-        from_email = settings.EMAIL_HOST_USER
-        to_list=[str(user_email[0])]
-        send_mail(subject, message, from_email, to_list, fail_silently=True)
-        messages.info(request,'Your registtion has successfully completed please check and verify a email by clicking verification link!')
-        # form = Signin()
-        return redirect('/signin')
+            user_email = form.pass_to_email()  # ['this will return the email of user in list data structure and user 1st name']
+            subject = "Welcome to BKB Signup!|| Please verify your email!!"
+            message = "Dear " + user_email[1] + "!\n\n" +"Please verify the below link:\n"+str(domain) + '/activate/'+f'{str(auth_tocken)}'+"\nWelcome to BKB Seo and Web Services, your trusted partner for effective Off-Page SEO services and Web Development!, we specialize in enhancing your online visibility and driving organic traffic to your website through strategic off-page optimization techniques like Link Building , Social media marketing, Local SEO etc."+"\n\n" + "Please click the confirmation link in order to activate  singup." + "\n\n" + "Thanks and Regards, \n" + "BKB SERVICES."
+            from_email = settings.EMAIL_HOST_USER
+            to_list=[str(user_email[0])]
+            send_mail(subject, message, from_email, to_list, fail_silently=True)
+            messages.info(request,'Your registration has successfully completed please check and verify a email by clicking verification link!')
+            # form = Signin()
+            return redirect('/signin')
             ## ending code for signup 1 mail
+        else:
+            form = Signup()
+            messages.error(request,'Please check the form fiels, invalid input!')
+            return render(request, 'Signup.html', {'form': form})
+
     else:
         form = Signup()
         return render(request, 'Signup.html',{'form': form})
