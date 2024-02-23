@@ -9,8 +9,12 @@ main feature which I have to build:
 ->DDoS attack  --->multi login validation 
 ->Password should be strong
 -> Brutforce attack 
+->used google recapch api
 
 4.make a admin pannel there only autherised ppl should access
 ->ACL --> create multiple profile and give access accordingly to manage web.
+
+
+5. use the GMass API to verify this email exist or not.
 
 
