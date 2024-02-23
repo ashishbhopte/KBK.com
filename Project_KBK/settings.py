@@ -51,7 +51,12 @@ INSTALLED_APPS = [
     'BKB_Home',
     'BKB_Registation',
     'django_recaptcha',
-    'django.contrib.sites', ## This is for login with google 
+## This is for login with google
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'Project_KBK.urls'
@@ -149,4 +155,10 @@ RECAPTCHA_PRIVATE_KEY = '6LcpBlEpAAAAAO0tcE-HdkxfmxMEFC95IIEKsrY9'
 MESSAGE_TAGS={
     messages.ERROR:'danger'
 }
+
+## This is for login with google
+AUTHENTICATION_BACKENDS = ( 'django.contrib.auth.backends.ModelBackend', 'allauth.account.auth_backends.AuthenticationBackend')
+SITE_ID = 2
+LOGIN_REDIRECT_URL = '/afterlogin'
+SOCIALACCOUNT_PROVIDERS = { 'google': { 'SCOPE': [ 'profile', 'email', ], 'AUTH_PARAMS': { 'access_type': 'online', } } }
 

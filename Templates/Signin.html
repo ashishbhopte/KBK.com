@@ -1,3 +1,4 @@
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +33,14 @@
            <!-- <button type="submit" value="RESET" onclick="resetForm()" >Sign-In</button>-->
             <button id="signupBtn" type="submit" value="RESET" onclick="resetForm()">Sign-In</button>
         </div>
-
+        <div class="google-or">
+            OR
+        </div>
+        <a href="{% provider_login_url 'google'%}">
+            <button type="button" class="google-sign-in-button">
+                Sign in with Google
+            </button>
+        </a>
     </form>
 </div>
 </div>

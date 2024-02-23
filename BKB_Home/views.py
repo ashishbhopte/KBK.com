@@ -148,7 +148,7 @@ def signin(request):
                 messages.error(request, "Credencials are incorrect please verify and signin again!")
                 return render(request, 'Signin.html', {'form': form})
             login(request, user)
-            return render(request,'afterlogin.html')
+            return redirect('/afterlogin')
         except:
             # form = Signin()
             messages.error(request, "Something went wrong please check and verify again!")
@@ -161,4 +161,7 @@ def signout(request):
     logout(request)
     messages.success(request,"Logged out sucessfully!!!")
     return redirect('/')
+
+def afterlogin(request):
+    return render(request,'afterlogin.html')
 
