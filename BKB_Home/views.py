@@ -3,18 +3,22 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.db import IntegrityError
-from .form import KBKForm, Signup, Signin # remember mene form  and model ka nam same diya hai
+from .form import KBKForm, Signup, Signin  # remember mene form  and model ka nam same diya hai
 from .models import KBKform, signup_model
 import datetime
 from django.contrib.auth.models import User, auth
 from django.shortcuts import render, HttpResponse, redirect
 from Project_KBK import settings
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes,force_str
+from django.utils.encoding import force_bytes, force_str
 from django.http import Http404
 from django.contrib.auth.models import User
-from . models import signup_model
+from .models import signup_model
 from django.contrib.sites.shortcuts import get_current_site
+from django.http import JsonResponse
+import requests
+
+
 def Home(request):
     form = KBKForm()
     return render(request, 'BKB.html', {
@@ -32,7 +36,8 @@ def SaveForm(request):
                 Url = request.POST.get('Url')
                 Company = request.POST.get('Company')
                 Date = datetime.datetime.now()
-                form_data = KBKform(Name=Name, Email=Email, Phone_no=Phone_no, Url=Url, Company=Company, Date=Date) # KBKformis a DB name
+                form_data = KBKform(Name=Name, Email=Email, Phone_no=Phone_no, Url=Url, Company=Company,
+                                    Date=Date)  # KBKformis a DB name
                 form_data.save()  # This method will save the data
                 form = KBKForm()
                 return render(request, 'thankyou.html')
@@ -61,6 +66,7 @@ def signup(request):
         form = Signup(request.POST)
         username = request.POST['username']
         email = request.POST['email']
+        # if email_verify==
         if User.objects.filter(email=email):
             messages.error(request, "User email is already exist, Please login with this email or forger password!")
             return redirect('/signin')
@@ -74,48 +80,54 @@ def signup(request):
             messages.error(request, "User name should alpha numeric !")
             return redirect('/signup')
         if form.is_valid():
-            form.save().is_active=False  # this will inactivate the user even user is successfully created, remember in admin area.
+            form.save().is_active = False  # this will inactivate the user even user is successfully created, remember in admin area.
             form.save()  # this will give u current user name.
             try:
                 auth_tocken = str(uuid.uuid4())
                 user = User.objects.get(username=username)
-                signup_model_obj = signup_model.objects.create(user=user, auth_tocken=str(auth_tocken), is_verified=False)
+                signup_model_obj = signup_model.objects.create(user=user, auth_tocken=str(auth_tocken),
+                                                               is_verified=False)
                 signup_model_obj.save()  # This will store this data in db.(signup_model)
             except Exception as e:
                 print(e)
 
-            current_site = get_current_site(request) # Function is used to retrieve the current site from the Site model.
-            print('current_site',current_site)
+            current_site = get_current_site(
+                request)  # Function is used to retrieve the current site from the Site model.
+            print('current_site', current_site)
             domain = current_site.domain
             ## start code for signup 1 mail
 
             user_email = form.pass_to_email()  # ['this will return the email of user in list data structure and user 1st name']
             subject = "Welcome to BKB Signup!|| Please verify your email!!"
-            message = "Dear " + user_email[1] + "!\n\n" +"Please verify the below link:\n"+str(domain) + '/activate/'+f'{str(auth_tocken)}'+"\nWelcome to BKB Seo and Web Services, your trusted partner for effective Off-Page SEO services and Web Development!, we specialize in enhancing your online visibility and driving organic traffic to your website through strategic off-page optimization techniques like Link Building , Social media marketing, Local SEO etc."+"\n\n" + "Please click the confirmation link in order to activate  singup." + "\n\n" + "Thanks and Regards, \n" + "BKB SERVICES."
+            message = "Dear " + user_email[1] + "!\n\n" + "Please verify the below link:\n" + str(
+                domain) + '/activate/' + f'{str(auth_tocken)}' + "\nWelcome to BKB Seo and Web Services, your trusted partner for effective Off-Page SEO services and Web Development!, we specialize in enhancing your online visibility and driving organic traffic to your website through strategic off-page optimization techniques like Link Building , Social media marketing, Local SEO etc." + "\n\n" + "Please click the confirmation link in order to activate  singup." + "\n\n" + "Thanks and Regards, \n" + "BKB SERVICES."
             from_email = settings.EMAIL_HOST_USER
-            to_list=[str(user_email[0])]
+            to_list = [str(user_email[0])]
             send_mail(subject, message, from_email, to_list, fail_silently=True)
-            messages.info(request,'Your registration has successfully completed please check and verify a email by clicking verification link!')
+            messages.info(request,
+                          'Your registration has successfully completed please check and verify a email by clicking verification link!')
             # form = Signin()
             return redirect('/signin')
             ## ending code for signup 1 mail
         else:
             form = Signup()
-            messages.error(request,'Please check the form fiels, invalid input!')
+            messages.error(request, 'Please check the form fiels, invalid input!')
             return render(request, 'Signup.html', {'form': form})
 
     else:
         form = Signup()
-        return render(request, 'Signup.html',{'form': form})
+        return render(request, 'Signup.html', {'form': form})
+
+
 
 # This acivate function creating for html link by click to redirect signin page
 def activate(request, auth_tocken):
     try:
-        signup_model_obj= signup_model.objects.filter(auth_tocken=auth_tocken).first()# yha prob ho sakti hai
+        signup_model_obj = signup_model.objects.filter(auth_tocken=auth_tocken).first()  # yha prob ho sakti hai
         user = User.objects.get(username=signup_model_obj)
         print(user)
         if signup_model_obj:
-            signup_model_obj.is_verified=True
+            signup_model_obj.is_verified = True
             signup_model_obj.save()
             user.is_active = True
             user.save()
@@ -127,6 +139,8 @@ def activate(request, auth_tocken):
             return redirect('/signup')
     except Exception as e:
         print(e)
+
+
 def signin(request):
     if request.method == "POST":
         form = Signin(request.POST)
@@ -135,15 +149,15 @@ def signin(request):
         # username = username.POST.get('username')
         # password = password.POST.get('password')
         try:
-            user_obj = User.objects.filter(username=username).first() # This line will filter user from the DB.
+            user_obj = User.objects.filter(username=username).first()  # This line will filter user from the DB.
             if user_obj is None:
-                messages.error(request,"User not found, Please signup!")
-                return render(request,'Signin.html',{'form': form})
-            signup_model_obj=signup_model.objects.filter(user=user_obj).first()
+                messages.error(request, "User not found, Please signup!")
+                return render(request, 'Signin.html', {'form': form})
+            signup_model_obj = signup_model.objects.filter(user=user_obj).first()
             if not signup_model_obj.is_verified:
                 messages.error(request, "This object is not at verified, Please verify it by email and signin!")
                 return render(request, 'Signin.html', {'form': form})
-            user=authenticate(username=username,password=password)
+            user = authenticate(username=username, password=password)
             if user is None:
                 messages.error(request, "Credencials are incorrect please verify and signin again!")
                 return render(request, 'Signin.html', {'form': form})
@@ -157,11 +171,12 @@ def signin(request):
         form = Signin()
         return render(request, 'Signin.html', {'form': form})
 
+
 def signout(request):
     logout(request)
-    messages.success(request,"Logged out sucessfully!!!")
+    messages.success(request, "Logged out sucessfully!!!")
     return redirect('/')
 
-def afterlogin(request):
-    return render(request,'afterlogin.html')
 
+def afterlogin(request):
+    return render(request, 'afterlogin.html')
