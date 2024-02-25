@@ -83,3 +83,30 @@ class Signin(forms.Form):
     class meta:
         model = User
         field = ('username','password')
+
+
+class Forgetpassword(forms.Form):
+    username = forms.CharField(label=False, widget=forms.TextInput(
+        attrs={'class': "form-cont", 'placeholder': "Username",
+               'style': 'width: 80%;'}), required=True)
+    django_recaptcha = ReCaptchaField(label=False, required=True)
+    class meta:
+        model = User
+        field = ('username')
+
+class Changepassword(forms.Form):
+    password1 = forms.CharField(label=False, widget=forms.PasswordInput(
+        attrs={'class': "form-cont", 'placeholder': "Please enter the Password", 'style': 'width: 80%;'}),
+                                required=True)
+    password2 = forms.CharField(label=False, widget=forms.PasswordInput(
+        attrs={'class': "form-cont", 'placeholder': "Please re-enter the Password", 'style': 'width: 80%;'}),
+                                required=True)
+    django_recaptcha = ReCaptchaField(label=False, required=True)
+
+    class meta:
+        model = User
+        field = ('password1','password2')
+
+
+
+

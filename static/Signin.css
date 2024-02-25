@@ -70,13 +70,13 @@ display:flex;
 justify-content:space-between;
 }
 .btn-field button{
-flex-basis:48%;
-background:#3c00a0;
+background:#5341EE;
 color:#fff;
 height:40px;
 border-radius:20px;
 border:0;
 outline:0;
+text-decoration:none;
 curser: pointer;
 transition:background 1s;
 z-index:2;
@@ -134,4 +134,12 @@ color:#555;
 
 .google-or{
 margin-top:4%;
+}
+
+.Forget-password{
+text-align: left;
+}
+.Forget-password a{
+color:4D3BE7;
+text-decoration:none;
 }

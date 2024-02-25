@@ -9,5 +9,8 @@ urlpatterns = [
     path('signin/', views.signin, name="signin"),
     path('signout/', views.signout, name="signout"),
     path('afterlogin/', views.afterlogin, name="afterlogin"),
+    path('activate/<slug:auth_tocken>/', views.activate, name="activate"),
+    path('forgetpassword/', views.forgetpassword, name="forgetpassword"),
+    path('changepassword/', views.changepassword, name="changepassword"),
 
 ]
