@@ -196,18 +196,21 @@ def forgetpassword(request):
                 messages.info(request, 'No user,found with this name')
                 return render(request, 'Forgerpassword.html', {'form': form})
             user_obj= User.objects.get(username=username)  # with this line you will get the obj of this user
-            print('This is that user:',user_obj)
-            #This below line will send the email for forget password:
-            # token = str(uuid.uuid4()) # this will create the random token
-            # subject = "Reset Password for BKB SEOANDWEB!"
-            # message = "Dear " + user_email[1] + "!\n\n" + "Please verify the below link:\n" + str(
-            #     domain) + '/activate/' + f'{str(auth_tocken)}' + "\nWelcome to BKB Seo and Web Services, your trusted partner for effective Off-Page SEO services and Web Development!, we specialize in enhancing your online visibility and driving organic traffic to your website through strategic off-page optimization techniques like Link Building , Social media marketing, Local SEO etc." + "\n\n" + "Please click the confirmation link in order to activate  singup." + "\n\n" + "Thanks and Regards, \n" + "BKB SERVICES."
-            # from_email = settings.EMAIL_HOST_USER
-            # to_list = [str(user_email[0])]
-            # send_mail(subject, message, from_email, to_list, fail_silently=True)
+            print('This is that user:',user_obj.email)
+            # ### This below line will send the email for forget password:
+            current_site = get_current_site(request)
+            domain = current_site.domain
+            token = str(uuid.uuid4()) # this will create the random token
+            subject = "Reset Password for BKB SEOANDWEB!"
+            message = "Dear " + user_obj.first_name + "!\n\n" + "Please click the below link to reset the password:\n" + str(domain) + '/forgetpassword/' + f'{str(token)}' + "\n" + "\n\n" + "Please click the confirmation link in order to activate  singup." + "\n\n" + "Thanks and Regards, \n" + "BKB SERVICES."
+            from_email = settings.EMAIL_HOST_USER
+            to_list = [str(user_obj.email)]
+            send_mail(subject, message, from_email, to_list, fail_silently=True)
 
         except Exception as e:
             print(e)
-    print('direct redirecting to the same page')
-    form=Forgetpassword()
-    return render(request, 'Forgerpassword.html', {'form':form})
+
+    else:
+        print('direct redirecting to the same page')
+        form = Forgetpassword()
+        return render(request,'Forgerpassword.html',{'form':form})
