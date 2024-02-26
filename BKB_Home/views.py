@@ -189,12 +189,12 @@ def forgetpassword(request):
     print('inside forget password')
     if request.method == "POST":
         print('inside if post condition')
-        form = Forgetpassword(request.POST)
-        username=request.POST.get('username')
+        form = Forgetpassword(request.POST) # This will craete the form
+        username=request.POST.get('username') # This will take the user which has given in fruntend
         try:
             if not User.objects.filter(username=username).first():
                 messages.info(request, 'No user,found with this name')
-                return render(request, 'Forgerpassword.html', {'form': form})
+                return render(request, 'Forgerpassword.html', {'form': form}) # If that user is not present than will return the msg
             user_obj= User.objects.get(username=username)  # with this line you will get the obj of this user
             print('This is that user:',user_obj.email)
             # ### This below line will send the email for forget password:
