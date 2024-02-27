@@ -195,22 +195,41 @@ def forgetpassword(request):
             if not User.objects.filter(username=username).first():
                 messages.info(request, 'No user,found with this name')
                 return render(request, 'Forgerpassword.html', {'form': form}) # If that user is not present than will return the msg
-            user_obj= User.objects.get(username=username)  # with this line you will get the obj of this user
-            print('This is that user:',user_obj.email)
-            # ### This below line will send the email for forget password:
-            current_site = get_current_site(request)
-            domain = current_site.domain
-            token = str(uuid.uuid4()) # this will create the random token
-            subject = "Reset Password for BKB SEOANDWEB!"
-            message = "Dear " + user_obj.first_name + "!\n\n" + "Please click the below link to reset the password:\n" + str(domain) + '/forgetpassword/' + f'{str(token)}' + "\n" + "\n\n" + "Please click the confirmation link in order to activate  singup." + "\n\n" + "Thanks and Regards, \n" + "BKB SERVICES."
-            from_email = settings.EMAIL_HOST_USER
-            to_list = [str(user_obj.email)]
-            send_mail(subject, message, from_email, to_list, fail_silently=True)
+            else:
+                user_obj= User.objects.get(username=username)  # with this line you will get the obj of this user
+                print('This is that user:',user_obj.email)
+                signup_model_obj = signup_model.objects.get(user=user_obj) # Here basically you are getting this obj for signup_model model.
+                token = str(uuid.uuid4())  # this will create the random token
+                signup_model_obj.auth_tocken = token
+                signup_model_obj.save()
+                # ### This below line will send the email for forget password:
+                current_site = get_current_site(request)
+                domain = current_site.domain
+                subject = "Reset Password for BKB SEOANDWEB!"
+                message = "Dear " + user_obj.first_name + "!\n\n" + "Please click the below reset password page:\n" + str(domain) + '/resetpassword/' + f'{str(token)}' +"\n\n" + "Thanks and Regards, \n" + "BKB SERVICES."
+                from_email = settings.EMAIL_HOST_USER
+                to_list = [str(user_obj.email)]
+                send_mail(subject, message, from_email, to_list, fail_silently=True)
+                messages.info(request, f'{user_obj.first_name} We have sent a forget password link to your email please check!'.format())
+                return render(request, 'Forgerpassword.html', {'form': form})
 
         except Exception as e:
             print(e)
 
     else:
-        print('direct redirecting to the same page')
+        print('This is else of forgetpassword')
         form = Forgetpassword()
         return render(request,'Forgerpassword.html',{'form':form})
+
+def resetpassword(request,token):
+    if request.method == "GET":
+        signup_mode_obj= signup_model.objects.get(auth_tocken=token)
+        print(signup_mode_obj)
+        form = Changepassword()
+        return render(request, 'Changepassword.html', {'form': form})
+    elif request.method == "POST":
+        pass
+    else:
+        form = Changepassword()
+        return render(request, 'Changepassword.html', {'form': form})
+

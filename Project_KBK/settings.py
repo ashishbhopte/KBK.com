@@ -18,7 +18,7 @@ from django.contrib.messages import constants as messages
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# This one I have added for gmail code
+# This one I have added for gmail code which is reffering to info file.
 
 EMAIL_HOST= EMAIL_HOST
 EMAIL_PORT= EMAIL_PORT
