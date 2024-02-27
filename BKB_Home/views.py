@@ -180,11 +180,6 @@ def signout(request):
 def afterlogin(request):
     return render(request, 'afterlogin.html')
 
-def changepassword(request):
-    print('inside change password ')
-    form=Changepassword()
-    return render(request, 'Changepassword.html', {'form':form})
-
 def forgetpassword(request):
     print('inside forget password')
     if request.method == "POST":
@@ -217,18 +212,36 @@ def forgetpassword(request):
             print(e)
 
     else:
-        print('This is else of forgetpassword')
         form = Forgetpassword()
         return render(request,'Forgerpassword.html',{'form':form})
 
 def resetpassword(request,token):
     if request.method == "GET":
         signup_mode_obj= signup_model.objects.get(auth_tocken=token)
-        print(signup_mode_obj)
         form = Changepassword()
-        return render(request, 'Changepassword.html', {'form': form})
+        return render(request, 'Changepassword.html', {'form': form,'user_id':signup_mode_obj.user.id}) #from here you are passing the user_id as well
+
     elif request.method == "POST":
-        pass
+        new_password=request.POST.get('password1') # from frunt end we havce taken the password1
+        confirm_password=request.POST.get('password2') # from frunt end we havce taken the patake2
+        user_id=request.POST.get('user_id')
+        user_obj = User.objects.get(id=user_id)
+        if new_password != confirm_password:
+            messages.error(request, 'Password have not matched.')
+            return redirect(f'/resetpassword/{token}/')
+        elif user_id is None:
+            messages.error(request,'No user ID found, Please try again')
+            return redirect(f'/resetpassword/{token}/')
+
+        elif user_obj.password == new_password:
+            messages.error(request, 'You already used this password please with different')
+            return redirect(f'/resetpassword/{token}/')
+
+        else:
+            user_obj.set_password(new_password)
+            user_obj.save()
+            messages.info(request, 'your password has successfully changed, Please login')
+            return redirect('/signin')
     else:
         form = Changepassword()
         return render(request, 'Changepassword.html', {'form': form})
