@@ -1,0 +1,66 @@
+body{
+background-image: linear-gradient(rgba(0,0,50,0.8),rgba(0,0,50,0.8)),url(/static/images/afterlogin1.jpg);
+background-size: cover;
+}
+#services_and_work{
+display:flex;
+padding: 30px 0px;
+position: relative;
+overflow:hidden;
+min-height:100vh;
+background:rgba(0,0,0,0.1);
+
+}
+
+.background-bg{
+position:absolute;
+top:0;
+lest:0;
+min-width:100%;
+min-height:100%;
+z-index:-1;
+}
+
+.services-list{
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+grid-gap: 40px;
+margin-top:100px;
+}
+.services-list div{
+background:#E1D2DB;
+padding: 40px;
+font-size:13px;
+font-weight:300px;
+border-radius:10px;
+transition: background 0.5s, transform 0.5s;
+
+}
+.services-list div svg{
+height: 50px;
+width:50px;
+font-size: 50px;
+margin-bottom:30px;
+}
+
+.services-list div a{
+text-decoration:none;
+color:#fff;
+font-size: 15px;
+margin-top: 10px;
+background-color: #fa0f4b;
+border-radius:10px;
+padding: 3px;
+margin-left: 40%;
+
+}
+
+.services-list div p{
+font-size: 15px;
+}
+
+.services-list div:hover{
+background: #FF4A4A;
+transform: translateY(-10px);
+}
+
