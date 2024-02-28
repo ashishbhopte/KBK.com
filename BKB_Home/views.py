@@ -162,7 +162,8 @@ def signin(request):
                 messages.error(request, "Credencials are incorrect please verify and signin again!")
                 return render(request, 'Signin.html', {'form': form})
             login(request, user)
-            return redirect('/afterlogin')
+            print('user loggnin',user)
+            return redirect(f'/afterlogin/{user.first_name}')
         except:
             messages.error(request, "Something went wrong please check and verify again!")
             return render(request, 'Signin.html', {'form': form})
@@ -177,7 +178,8 @@ def signout(request):
     return redirect('/')
 
 
-def afterlogin(request):
+def afterlogin(request,first_name):
+    messages.success(request,f'Welcome back {first_name}, \n You have successfully logged in to BKB service and plan section')
     return render(request, 'afterlogin.html')
 
 def forgetpassword(request):

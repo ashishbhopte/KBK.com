@@ -4,56 +4,104 @@
     <meta charset="UTF-8">
     <title>As os now successfully login </title>
     <link rel="stylesheet" href="/static/afterlogin.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <!--Bootstrap cdn-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
 <div id="services_and_work">
     <div class="container">
         {% if user.is_authenticated %}
-        <h1>Hello {{ username }}</h1>
-        <h3>You are successfully logged in! <p>yhi pe meri services and feedback form rhega </p></h3>
-        {% endif %}
-        <button><a href="/signout">Sign-out</a></button>
+
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            <strong>{{ message }}.</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        <div class="healing-line">
+            <button><a href="/signout">Sign-out</a></button>
+            <div class="image">
+                <img src="/static/images/userimage/5.jpg" alt="Card Image">
+            </div>
+        </div>
         <div class="sub-title">
             <h1 style="color: white;">Our Services and Plan:</h1>
         </div>
         <div class="services-list">
             <div class="my-services-web">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                     width="30" height="30" viewBox="0 0 30 30"><path fill="currentColor"
-                  d="m12.89 3l1.96.4L11.11 21l-1.96-.4L12.89 3m6.7 9L16 8.41V5.58L22.42 12L16 18.41v-2.83L19.59 12M1.58
-                  12L8 5.58v2.83L4.41 12L8 15.58v2.83L1.58 12Z"/></svg>
+                     width="30" height="30" viewBox="0 0 30 30">
+                    <path fill="currentColor"
+                          d="m12.89 3l1.96.4L11.11 21l-1.96-.4L12.89 3m6.7 9L16 8.41V5.58L22.42 12L16 18.41v-2.83L19.59 12M1.58
+                  12L8 5.58v2.83L4.41 12L8 15.58v2.83L1.58 12Z"/>
+                </svg>
 
                 <h1>Web Development</h1>
-                <p>The Technologies I used to build the website using Python, Django web framework, HTML, CSS, and the basics of JavaScript.</p>
+                <p>The Technologies I used to build the website using Python, Django web framework, HTML, CSS, and the
+                    basics of JavaScript.</p>
                 <a href="#">Know More</a>
             </div>
 
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                      <path stroke-dasharray="16" stroke-dashoffset="16" d="M8 18H7C4.5 18 3 16 3 14C3 12 4.5 10 7 10C8 10 8.5 10.5 8.5 10.5M16 18H17C19.5 18 21 16 21 14C21 12 19.5 10 17 10C16 10 15.5 10.5 15.5 10.5"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s"
-                      values="16;0"/></path><path stroke-dasharray="9" stroke-dashoffset="9" d="M17 10C17 10 17 9.5 17 9C17 6.5 15 4 12 4M7 10V9C7 6.5 9 4 12 4">
-                    <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.5s" dur="0.3s" values="9;0"/></path><path stroke-dasharray="8" stroke-dashoffset="8"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      d="M12 20V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.9s" dur="0.2s" values="8;0"/></path><path stroke-dasharray="4" stroke-dashoffset="4"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           d="M12 13L14 15M12 13L10 15"><animate fill="freeze" attributeName="stroke-dashoffset" begin="1.1s" dur="0.2s" values="4;0"/></path></g></svg>
+                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                       stroke-width="2">
+                        <path stroke-dasharray="16" stroke-dashoffset="16"
+                              d="M8 18H7C4.5 18 3 16 3 14C3 12 4.5 10 7 10C8 10 8.5 10.5 8.5 10.5M16 18H17C19.5 18 21 16 21 14C21 12 19.5 10 17 10C16 10 15.5 10.5 15.5 10.5">
+                            <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s"
+                                     values="16;0"/>
+                        </path>
+                        <path stroke-dasharray="9" stroke-dashoffset="9"
+                              d="M17 10C17 10 17 9.5 17 9C17 6.5 15 4 12 4M7 10V9C7 6.5 9 4 12 4">
+                            <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.5s" dur="0.3s"
+                                     values="9;0"/>
+                        </path>
+                        <path stroke-dasharray="8" stroke-dashoffset="8"
+                              d="M12 20V14">
+                            <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.9s" dur="0.2s"
+                                     values="8;0"/>
+                        </path>
+                        <path stroke-dasharray="4" stroke-dashoffset="4"
+                              d="M12 13L14 15M12 13L10 15">
+                            <animate fill="freeze" attributeName="stroke-dashoffset" begin="1.1s" dur="0.2s"
+                                     values="4;0"/>
+                        </path>
+                    </g>
+                </svg>
                 <h1>Web Hosting</h1>
-                <p>Using AWS Could - web services like: EC2, load balancer,S3, Lambda, RDS, Security group, Cloud watch etc.</p>
+                <p>Using AWS Could - web services like: EC2, load balancer,S3, Lambda, RDS, Security group, Cloud watch
+                    etc.</p>
                 <a href="#">Know More</a>
             </div>
 
             <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><defs><mask id="ipSSeo0">
-                    <g fill="none" stroke-width="4"><rect width="40" height="32" x="4" y="8" fill="#fff" stroke="#fff" rx="1.633"/>
-                        <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M16 18.948c-2-2.948-5.502-1.01-5.251 2.02C11 24 15 24 15.249 27.032C15.5 30.062 12 32 10 29.051M26 18h-4v13h4m-4-6h4"/><rect width="6" height="13" x="32" y="18" stroke="#000"
-                        stroke-linecap="round" stroke-linejoin="round" rx="3"/></g></mask></defs><path fill="currentColor" d="M0 0h48v48H0z" mask="url(#ipSSeo0)"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+                    <defs>
+                        <mask id="ipSSeo0">
+                            <g fill="none" stroke-width="4">
+                                <rect width="40" height="32" x="4" y="8" fill="#fff" stroke="#fff" rx="1.633"/>
+                                <path stroke="#000" stroke-linecap="round" stroke-linejoin="round"
+                                      d="M16 18.948c-2-2.948-5.502-1.01-5.251 2.02C11 24 15 24 15.249 27.032C15.5 30.062 12 32 10 29.051M26 18h-4v13h4m-4-6h4"/>
+                                <rect width="6" height="13" x="32" y="18" stroke="#000"
+                                      stroke-linecap="round" stroke-linejoin="round" rx="3"/>
+                            </g>
+                        </mask>
+                    </defs>
+                    <path fill="currentColor" d="M0 0h48v48H0z" mask="url(#ipSSeo0)"/>
+                </svg>
                 <h1>Off Page- SEO</h1>
-                <p>Experienced SEO Outreach Consultant with a focus on SaaS link building, growth marketing, and content marketing.
-                    I thrive on developing and executing strategies that boost online visibility, drive organic traffic, and contribute to overall business growth.</p>
+                <p>Experienced SEO Outreach Consultant with a focus on SaaS link building, growth marketing, and content
+                    marketing.
+                    I thrive on developing and executing strategies that boost online visibility, drive organic traffic,
+                    and contribute to overall business growth.</p>
                 <a href="#">Know More</a>
             </div>
         </div>
 
     </div>
+    {% endif %}
       <video autoplay loop muted playsinline class="background-bg">
         <source src="/static/images/forget_vidio1.mp4" type="video/mp4">
       </video>
