@@ -17,4 +17,6 @@ main feature which I have to build:
 
 5. use the GMass API to verify this email exist or not.
 
+6. implemented the gmail reset password verification also.
+
 

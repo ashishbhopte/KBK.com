@@ -63,4 +63,8 @@ font-size: 15px;
 background: #FF4A4A;
 transform: translateY(-10px);
 }
-
+.sub-title
+{
+text-align: center;
+border:2px solid red;
+}
