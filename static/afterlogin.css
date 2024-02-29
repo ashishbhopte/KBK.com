@@ -10,11 +10,57 @@ overflow:hidden;
 min-height:100vh;
 background:rgba(0,0,0,0);
 }
-.healing-line{
-display:flex;
-justify-content:flex-end;
+
+/*This is  for navigation bar for afterloginpafe*/
+
+nav a img{
+ height:50px;
+ width:200px;
+ margin-left:0px;
+ border:2px solid red;
 }
-.healing-line .image{
+
+nav{
+display: flex;
+padding: 2% 6%;
+justify-content: space-between;
+align-item:center;
+}
+.nav-links{
+flex;1;  /*so it can occupy all the space in the row*/
+text-align: right;
+}
+.nav-links ul li{
+list-style:none;
+display: inline-block;
+padding:12px 12px;
+position:relative;
+}
+.nav-links ul li a{
+text-decoration: none;
+color: white;
+margin-right: 20px;
+font-size: 20px;
+font-family: 'Kanit', sans-serif;
+font-family: 'Teko', sans-serif;
+font-family: 'Ubuntu', sans-serif;
+}
+
+.nav-links ul li::after{
+   content:'';
+   width:0%;
+   height:2px;
+   background: #F93535;
+   /*margin:auto;*/
+   display: block;
+   transition:0.5s;
+}
+
+.nav-links ul li:hover::after{
+   width:80%;
+}
+
+nav .image{
 width: 90px;
 height: 90px;
 padding: 2px;
@@ -23,12 +69,131 @@ background: #fff;
 border-radius: 50%;
 margin-bottom: 5px;
 }
-.healing-line .image img {
+nav .image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
 }
+
+ /* ending This is  for navigation bar for afterloginpafe*/
+/*testing*/
+nav{
+  display: flex;
+  width:100%;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.logo{
+width:100px;
+}
+
+nav ul li{
+ display:inline-block;
+ list-style: none;
+ margin: 10px 25px;
+}
+nav ul li a{
+  font-family: 'Teko', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
+  color:#fff;
+  text-decoration: none;
+  font-size:23px;
+  margin: 10px 40px;
+  position:relative;
+}
+
+nav ul li a::after{
+  content:'';
+  width:0;
+  height:3px;
+  background: #ff004f;
+  display:block;
+  position:absolute;
+  left: 0px;
+  bottom; -8px;
+  transition:0.5s;
+}
+nav ul li a:hover::after{
+width:100%;
+}
+
+/*end testing*/
+
+/*Nevigation bar for smalls creen*/
+
+@media only screen and (max-width: 600px){
+   nav ul li a{
+    font-size: 20px;
+    padding:10px;
+    margin-top: 15px;
+    }
+  nav ul{
+   margin-bottom:-8px;
+    }
+  .header-text h1{
+  margin-top: -60px;
+  font-size:30px;
+  }
+ .header-text h1 span{
+  font-size:30px;
+ }
+
+ .header-text{
+  width:0%;
+  margin-top:200px;
+ }
+ #top-image{
+    background repeat: no-repeat;
+    display:block;
+    background-image: url(images/small-top.png);
+    height:475px;
+    width:800px;
+    margin-top:100px;
+    margin-right:-10px;
+}
+nav .fa-solid{
+display:block;
+font-size:25px;
+}
+nav ul{
+ background:#EE3332;
+ position: fixed;
+ top: 0;
+ right:-170px;
+ width:170px;
+ height: 100vh;
+ padding-top:50px;
+ padding-left: 0px;
+ margin-top:0px;
+ z-index:2;
+ transition:right 0.5s;
+}
+
+nav ul li{
+  display:block;
+  margin-left:25px;
+  padding-left:10px;
+}
+
+nav ul li a{
+margin-left: -5px;
+margin-top: 20px;
+margin-bottom:20px;
+}
+nav ul li a span{
+margin-bottom:10px;
+}
+nav ul i{
+position:absolute;
+top:10px;
+left:42px;
+cursor:pointer;
+}
+}
+/*ending small screen navigation bar */
 
 .background-bg{
 position:absolute;
@@ -81,8 +246,4 @@ font-size: 15px;
 background: #FF4A4A;
 transform: translateY(-10px);
 }
-.sub-title
-{
-text-align: center;
-border:2px solid red;
-}
+
