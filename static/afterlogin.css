@@ -25,6 +25,7 @@ display: flex;
 padding: 2% 6%;
 justify-content: space-between;
 align-item:center;
+display: inline-block;
 }
 .nav-links{
 flex;1;  /*so it can occupy all the space in the row*/
@@ -33,7 +34,7 @@ text-align: right;
 .nav-links ul li{
 list-style:none;
 display: inline-block;
-padding:12px 12px;
+padding:3px 3px;
 position:relative;
 }
 .nav-links ul li a{
@@ -76,6 +77,10 @@ nav .image img {
   border-radius: 50%;
 }
 
+/*nav i{
+display:none;
+}*/
+
  /* ending This is  for navigation bar for afterloginpafe*/
 /*testing*/
 nav{
@@ -83,7 +88,7 @@ nav{
   width:100%;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+/*  flex-wrap: wrap;*/
 }
 
 .logo{
@@ -93,7 +98,7 @@ width:100px;
 nav ul li{
  display:inline-block;
  list-style: none;
- margin: 10px 25px;
+ margin: 10px 10px;
 }
 nav ul li a{
   font-family: 'Teko', sans-serif;
@@ -101,7 +106,7 @@ nav ul li a{
   color:#fff;
   text-decoration: none;
   font-size:23px;
-  margin: 10px 40px;
+  margin: 10px 10px;
   position:relative;
 }
 
