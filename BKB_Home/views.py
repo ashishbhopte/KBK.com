@@ -106,18 +106,16 @@ def signup(request):
             send_mail(subject, message, from_email, to_list, fail_silently=True)
             messages.info(request,
                           'Your registration has successfully completed please check and verify a email by clicking verification link!')
-            # form = Signin()
             return redirect('/signin')
             ## ending code for signup 1 mail
         else:
             form = Signup()
             messages.error(request, 'Please check the form fiels, invalid input!')
-            return render(request, 'Signup.html', {'form': form})
+            return render(request, 'Signup.html',{'form': form})
 
     else:
         form = Signup()
         return render(request, 'Signup.html', {'form': form})
-
 
 
 # This acivate function creating for html link by click to redirect signin page

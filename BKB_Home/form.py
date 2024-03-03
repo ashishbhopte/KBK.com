@@ -44,6 +44,8 @@ class Signup(UserCreationForm):
     password2 = forms.CharField(label=False, widget=forms.PasswordInput(
         attrs={'class': "form-cont", 'placeholder': "Please re-enter the Password", 'style': 'width: 80%;'}),
                                 required=True)
+
+
     django_recaptcha = ReCaptchaField(label=False, required=True)
 
     # def clean_email(self):  ## This is for email duplication check
