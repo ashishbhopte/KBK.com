@@ -1,0 +1,22 @@
+main feature which I have to build:
+1.login logout ->than user can pourchase the subscription and subscription should come in there card.
+
+2.user 1st time can use the free services with that we can get user emailID 
+
+3.No compromisession with validation and security:
+->SSL certification lgana.
+-> form validation and SQL injection secure karo
+->DDoS attack  --->multi login validation 
+->Password should be strong
+-> Brutforce attack 
+->used google recapch api
+
+4.make a admin pannel there only autherised ppl should access
+->ACL --> create multiple profile and give access accordingly to manage web.
+
+
+5. use the GMass API to verify this email exist or not.
+
+6. implemented the gmail reset password verification also.
+
+

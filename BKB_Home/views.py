@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.db import IntegrityError
 from .form import KBKForm, Signup, Signin,Changepassword,Forgetpassword  # remember mene form  and model ka nam same diya hai
-from .models import KBKform, signup_model
+from .models import KBKform # signup_model
 import datetime
 from django.contrib.auth.models import User, auth
 from django.shortcuts import render, HttpResponse, redirect

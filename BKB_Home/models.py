@@ -21,6 +21,7 @@ class signup_model(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     auth_tocken = models.CharField(max_length=100, default=None)
     is_verified = models.BooleanField(default=False)  # This field have to reflect in my admin user model also usko vies.py se hadle karna bad me
-
+    # image = models.ImageField(upload_to='static/userimage/',null=True,unique=False)
+    # feedback = models.TextField(max_length=500,blank=True, null=True)
     def __str__(self):
         return self.user.username
