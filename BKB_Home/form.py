@@ -43,7 +43,7 @@ class Signup(UserCreationForm):
                                 required=True)
     password2 = forms.CharField(label=False, widget=forms.PasswordInput(
         attrs={'class': "form-cont", 'placeholder': "Please re-enter the Password", 'style': 'width: 80%;'}),
-                                required=True)
+                                                                               required=True)
 
 
     django_recaptcha = ReCaptchaField(label=False, required=True)
