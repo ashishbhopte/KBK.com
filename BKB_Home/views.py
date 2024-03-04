@@ -89,7 +89,6 @@ def signup(request):
                 user = User.objects.get(username=username)
                 signup_model_obj = signup_model.objects.create(user=user, auth_tocken=str(auth_tocken),
                                                                is_verified=False,image=image_field)
-                print('congratulation ashish!')
                 signup_model_obj.save()  # This will store this data in db.(signup_model)
             except Exception as e:
                 print(e)
