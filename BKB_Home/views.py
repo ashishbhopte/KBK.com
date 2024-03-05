@@ -63,12 +63,14 @@ def SaveForm(request):
 
 def signup(request):
     if request.method == "POST":
-        form = Signup(request.POST)
+        form = Signup(request.POST,request.FILES)##,request.FILES
         username = request.POST['username']
         email = request.POST['email']
-        image_field = request.POST['image_field']
+        image = request.POST['image']
+        print(image)
+        # image = form.cleaned_data['image']
 
-        # if email_verify==
+
         if User.objects.filter(email=email):
             messages.error(request, "User email is already exist, Please login with this email or forger password!")
             return redirect('/signin')
@@ -88,7 +90,7 @@ def signup(request):
                 auth_tocken = str(uuid.uuid4())
                 user = User.objects.get(username=username)
                 signup_model_obj = signup_model.objects.create(user=user, auth_tocken=str(auth_tocken),
-                                                               is_verified=False,image=image_field)
+                                                               is_verified=False,image=image)
                 signup_model_obj.save()  # This will store this data in db.(signup_model)
             except Exception as e:
                 print(e)

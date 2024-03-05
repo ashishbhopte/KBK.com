@@ -3,6 +3,7 @@ from django.core.validators import RegexValidator
 from django_recaptcha.fields import ReCaptchaField
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import User
+from .models import signup_model
 
 
 class KBKForm(forms.Form):
@@ -25,7 +26,7 @@ class KBKForm(forms.Form):
     django_recaptcha = ReCaptchaField(label=False, required=True)
 
 
-class Signup(UserCreationForm):
+class Signup(UserCreationForm,forms.ModelForm):
     username = forms.CharField(label=False, widget=forms.TextInput(
         attrs={'class': "form-cont", 'placeholder': "Please Enter the Username", 'style': 'width: 80%;'}),
                                required=True)
@@ -44,7 +45,7 @@ class Signup(UserCreationForm):
     password2 = forms.CharField(label=False, widget=forms.PasswordInput(
         attrs={'class': "form-cont", 'placeholder': "Please re-enter the Password", 'style': 'width: 80%;'}),
                                                                                required=True)
-    image_field = forms.ImageField(label='Please chose your profile picture', required=False)
+    image = forms.ImageField(label='Please chose your profile picture', required=False)
 
     django_recaptcha = ReCaptchaField(label=False, required=True)
 
@@ -55,8 +56,8 @@ class Signup(UserCreationForm):
     #     return value
 
     class meta:
-        model = User
-        field = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2','image_field',)
+        model = User,signup_model
+        field = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2','image')
 
     def save(self, commit=True):
         user = super(Signup, self).save(commit=False)
