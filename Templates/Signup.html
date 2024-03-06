@@ -14,7 +14,7 @@
 <div class="form-box">
     <img src="/static/images/logo.png" alt="logo of BKB">
     <h1 id="title">Sign UP</h1>
-    <form id="form_signup" method="post" enctype="multipart/form-data"> <!--id="my_signup" onabort="" name="signup" action="{% url 'signup' %}" method="post">-->
+    <form id="form_signup" method="post" > <!--enctype="multipart/form-data" id="my_signup" onabort="" name="signup" action="{% url 'signup' %}" method="post">-->
         {% csrf_token %}
 
         {% for message in messages %}

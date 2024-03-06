@@ -67,7 +67,6 @@ def signup(request):
         username = request.POST['username']
         email = request.POST['email']
         image = request.POST['image']
-        print(image)
         # image = form.cleaned_data['image']
 
 
@@ -165,7 +164,7 @@ def signin(request):
                 return render(request, 'Signin.html', {'form': form})
             login(request, user)
             print('user loggnin',user)
-            return redirect(f'/afterlogin/{user.first_name}')
+            return redirect(f'/afterlogin/{user.username}')
         except:
             messages.error(request, "Something went wrong please check and verify again!")
             return render(request, 'Signin.html', {'form': form})
@@ -180,8 +179,10 @@ def signout(request):
     return redirect('/')
 
 
-def afterlogin(request,first_name):
-    messages.success(request,f'Welcome back {first_name}, \n You have successfully logged in to BKB service and plan section')
+def afterlogin(request,username):
+    user = User.objects.get(username=username)
+    messages.success(request,f'Welcome back {user.first_name}, \n You have successfully logged in to BKB service and plan section')
+    print(user.first_name)
     return render(request, 'afterlogin.html')
 
 def forgetpassword(request):
