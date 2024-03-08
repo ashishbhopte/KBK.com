@@ -63,12 +63,10 @@ def SaveForm(request):
 
 def signup(request):
     if request.method == "POST":
-        form = Signup(request.POST,request.FILES)##,request.FILES
+        form = Signup(request.POST,request.FILES)
         username = request.POST['username']
         email = request.POST['email']
-        image = request.POST['image']
-        # image = form.cleaned_data['image']
-
+        image = request.FILES['image']
 
         if User.objects.filter(email=email):
             messages.error(request, "User email is already exist, Please login with this email or forger password!")
@@ -147,8 +145,6 @@ def signin(request):
         form = Signin(request.POST)
         username = request.POST['username']
         password = request.POST['password']
-        # username = username.POST.get('username')
-        # password = password.POST.get('password')
         try:
             user_obj = User.objects.filter(username=username).first()  # This line will filter user from the DB.
             if user_obj is None:
@@ -175,14 +171,15 @@ def signin(request):
 
 def signout(request):
     logout(request)
-    messages.success(request, "Logged out sucessfully!!!")
+    messages.success(request, "Logged out sucessfully!!")
     return redirect('/')
 
 
 def afterlogin(request,username):
-    user = User.objects.get(username=username)
+    user=User.objects.get(username=username)
+    user1 = signup_model.objects.get(user_id=user.id)
+    print(user1.user,user1.auth_tocken,user1.is_verified,user1.image)
     messages.success(request,f'Welcome back {user.first_name}, \n You have successfully logged in to BKB service and plan section')
-    print(user.first_name)
     return render(request, 'afterlogin.html')
 
 def forgetpassword(request):
