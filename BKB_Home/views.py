@@ -66,7 +66,7 @@ def signup(request):
         form = Signup(request.POST,request.FILES)
         username = request.POST['username']
         email = request.POST['email']
-        image = request.FILES['image']
+        image = request.FILES['image'] #remember this solution 2days taken.
 
         if User.objects.filter(email=email):
             messages.error(request, "User email is already exist, Please login with this email or forger password!")
@@ -178,9 +178,9 @@ def signout(request):
 def afterlogin(request,username):
     user=User.objects.get(username=username)
     user1 = signup_model.objects.get(user_id=user.id)
-    print(user1.user,user1.auth_tocken,user1.is_verified,user1.image)
     messages.success(request,f'Welcome back {user.first_name}, \n You have successfully logged in to BKB service and plan section')
-    return render(request, 'afterlogin.html')
+    print("This is for image testing:",user1.image.url)
+    return render(request, 'afterlogin.html',{'user1':user1})
 
 def forgetpassword(request):
     print('inside forget password')
