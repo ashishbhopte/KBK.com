@@ -179,7 +179,6 @@ def afterlogin(request,username):
     user=User.objects.get(username=username)
     user1 = signup_model.objects.get(user_id=user.id)
     messages.success(request,f'Welcome back {user.first_name}, \n You have successfully logged in to BKB service and plan section')
-    print("This is for image testing:",user1.image.url)
     return render(request, 'afterlogin.html',{'user1':user1})
 
 def forgetpassword(request):

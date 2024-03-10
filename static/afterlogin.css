@@ -125,6 +125,10 @@ nav ul li a:hover::after{
 width:100%;
 }
 
+nav i{
+display:hidden;
+}
+
 /*end testing*/
 
 /*Nevigation bar for smalls creen*/
@@ -196,6 +200,8 @@ position:absolute;
 top:10px;
 left:42px;
 cursor:pointer;
+}
+nav i{
 color:white;
 }
 }
@@ -252,4 +258,53 @@ font-size: 15px;
 background: #FF4A4A;
 transform: translateY(-10px);
 }
+
+/*This is for know more section in our services */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+
+
+.card-contents{
+/*  padding: 1rem;*/
+  text-align: justify;
+}
+
+p{
+  font-size: 0.8em;
+  margin-bottom: 1rem;
+}
+
+.card__read-more{
+  display: block;
+  opacity: 0;
+  height: 0;
+  transition: all 0.5s;
+}
+
+.card__read-more--open{
+  display: block;
+  opacity: 1;
+  height: 100px;
+
+}
+
+.read-more-btn{
+  display: inline-block;
+  color: var(--accent);
+  background-color: #eee;
+  padding: 0.6rem 1.5rem;
+  font-size: 1em;
+  position: relative;
+  z-index: 1;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.read-more-btn:hover{
+  background-color: #fff;
+  box-shadow: 0 0 2rem rgba(0,0,0,0.1);
+  transform: translateY(-3px);
+}
+
+/* This is ending for the know more section in our services */
 
