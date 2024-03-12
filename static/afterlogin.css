@@ -308,3 +308,31 @@ p{
 
 /* This is ending for the know more section in our services */
 
+/*From here I am woking on our plan section*/
+
+.our-plan-heading{
+text-align: center;
+margin-top:5px;
+color:#FFFFFF;
+position:relative;
+}
+
+.our-plan-heading h1{
+margin-top:3%;
+font-size:35px;
+margin-bottom:20px;
+color:white;
+position:relative;
+}
+.our-plan-heading h1::after{
+content:'';
+width:350px;
+height:4px;
+border-radius:3px;
+background:#FF2329;
+position:absolute;
+bottom:-10px;
+left:50%;
+transform:translateX(-50%);
+}
+
