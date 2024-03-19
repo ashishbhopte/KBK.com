@@ -3,6 +3,7 @@ from django.core.validators import RegexValidator  # for regular expression in d
 from django.contrib.auth.models import User
 
 
+
 # Create your models here.
 class KBKform(models.Model):
     Name = models.CharField(max_length=70, null=False, blank=False, unique=True)

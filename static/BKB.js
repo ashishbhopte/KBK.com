@@ -1,4 +1,4 @@
-
+/*This is for main BKB page user rating swipper logic*/
 var swiper = new Swiper('.mySwiper', {
   slidesPerView: 3,
   spaceBetween: 10,

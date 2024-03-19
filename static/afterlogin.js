@@ -1,4 +1,4 @@
-/*This code for Read More sectioon */
+/*This code for Read More sectioon  afterlogin page tabbs*/
 
 const btn = document
     .querySelector('.read-more-btn');
@@ -27,3 +27,8 @@ cardcontents
 
     });
 /* Ending this code for Read More sectioon */
+
+/*This below code for user login my plan section*/
+
+
+/*This above  code for user login my plan section*/

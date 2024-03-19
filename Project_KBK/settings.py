@@ -40,9 +40,6 @@ SECRET_KEY = 'django-insecure-5nrmk9ucv1&w@e6qy@0)8&bk$*tgc(_v2gmzp)vm(k@yu%pqy_
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-# Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -60,6 +57,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 ]
+
+# Application definition
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
