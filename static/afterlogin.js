@@ -30,5 +30,14 @@ cardcontents
 
 /*This below code for user login my plan section*/
 
+/*let iconCart = document.querySelector('.icon-cart');
+let ourPlanProducts = document.querySelector('.our-plan-products');
+iconCart.addEventListener('click', () => {
+  ourPlanProducts.toggle('showCart');
+  console.log("showCart should display");
+});*/
+
+
+
 
 /*This above  code for user login my plan section*/

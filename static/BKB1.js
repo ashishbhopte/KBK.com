@@ -1,4 +1,4 @@
-/*This code for Read More sectioon */
+/*This code for Read More sectioon in afterlogin  page*/
 
 const parentContainer =  document.querySelector('.read-more-container');
 
