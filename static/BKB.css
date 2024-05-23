@@ -154,10 +154,18 @@ text-align:center;
    transition:0.5s;
 }
 
+.client-logo{
+display: grid;
+/*grid-template-rows:repeat(6,1fr);*/
+grid-template-columns:repeat(5,1fr);
+row-gap:20px;
+column-gap:20px;
+
+}
+
 .client-logo img{
 height:100px;
-width:100px;
-
+width:120px;
 }
 
 /*_____________from here about section css-----------------*/
