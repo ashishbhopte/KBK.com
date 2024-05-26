@@ -66,10 +66,10 @@ font-family: 'Ubuntu', sans-serif;
 display:flex;
 column-gap:5px;
 }
+
 .header-left{
 height:60%;
 width:120%;
-border: 2px solid green;
 }
 
 .header-right{
@@ -144,9 +144,9 @@ text-align:center;
 }
 
 .header-top-left h1::after{
-   margin:0% 40%;
+   margin:0% 38%;
    content:'';
-   width:20%;
+   width:25%;
    height:3px;
    background: #F93535;
    /*margin:auto;*/
@@ -160,13 +160,24 @@ display: grid;
 grid-template-columns:repeat(5,1fr);
 row-gap:20px;
 column-gap:20px;
-
+margin: 5% 1% 5% 1%;
 }
 
 .client-logo img{
 height:100px;
 width:120px;
 }
+
+.client-logo img:hover{
+transform: translateY(-5px);
+}
+
+.image{
+border-radius: 10px;
+background:cover;
+border:2px solid red;
+}
+
 
 /*_____________from here about section css-----------------*/
 

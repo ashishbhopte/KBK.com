@@ -13,7 +13,7 @@ class KBKForm(forms.Form):
         attrs={'class': "form-cont", 'placeholder': "Please Enter your Email!",
                'style': 'width: 300px;'}), required=True)  # Use EmailField for email addresses
     Phone_no = forms.CharField(label=False, required=False, widget=forms.TextInput(
-        attrs={'class': "form-cont", 'placeholder': "Mob number in format: +(Contrycode)XXXXXXXXXX",
+        attrs={'class': "form-cont", 'placeholder': "Example: +(Contrycode)XXXXXXXXXX",
                'style': 'width: 300px;', }), validators=[
         RegexValidator(regex=r'^\+\d{10,15}$', message='Enter a valid mobile number.',
                        code='invalid_mobile_number')], )  # This will validate the no and get only the integer value .
