@@ -493,6 +493,70 @@ transform: translateY(-5px);
 
 /*Ending of user rating slider code*/
 
+/*This is the footer  section*/
+body{
+background:#FF3939;
+}
+footer{
+background:#eef8ff;
+font-family:'popinss', sans-serif;
+box-sizing:border-box;
+background: linear-gradient(to right, #00093c,#2d0b00);
+border-top-left-radius: 125px;
+font-size:13px;
+colour:#FFFFFF;
+line-height:20px;
+border:2px solid yellow;
+}
+
+.row{
+border:2px solid red;
+justify-content:space-around;
+margin:auto;
+}
+.col0 .foo-image{
+height: 50px;
+width: 100px;
+}
+.col0{
+flex:0;
+margin-top:5%;
+margin-left:10%;
+border: 2px solid yellow;
+flex-basis: 200px;
+}
+.col1{
+flex:0;
+border: 2px solid yellow;
+flex-basis: 100px;
+}
+.col2{
+flex-basis: 150px;
+flex:-1;
+border: 2px solid yellow;
+}
+.col2 ul li a{
+text-decoration: none;
+list-style:none;
+colour:#FFFFFF;
+}
+.col2 ul li a:hover{
+text-decoration: underline;
+}
+.col2 ul li{
+list-style:none;
+}
+.col3{
+flex-basis: 100px;
+flex:0;
+border: 2px solid yellow;
+margin-right:10px;
+}
+
+
+/* Ending of the footer  section*/
+
+
 
 
 
