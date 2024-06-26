@@ -532,7 +532,7 @@ flex-basis: 100px;
 }
 .col2{
 flex-basis: 150px;
-flex:-1;
+flex:-1;b
 border: 2px solid yellow;
 }
 .col2 ul li a{
